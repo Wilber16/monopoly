@@ -40,3 +40,7 @@ Se consulta la sala con `get()` antes de iniciar la transacción de ingreso. Est
 
 ## v4: ingreso a salas
 La transacción usa el resultado de get() como base cuando Firebase inicia con caché vacía; distingue fallos de lectura, estado y escritura. Reglas actuales solo para partidas privadas de prueba, no resistentes a trampas.
+
+
+## Versión 13 — DELUXE
+Interfaz rediseñada y títulos de propiedad coleccionables con tabla de alquileres y costo de construcción. No requiere cambios de Firebase.
