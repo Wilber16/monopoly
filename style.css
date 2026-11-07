@@ -210,3 +210,68 @@ header{position:relative;z-index:2;background:#0b1a2de8;border-bottom:1px solid 
 .theme-classic .socialPanel .reactionBar button{background:#dfc491}
 .theme-neon .gameTabs button.active{background:#59e8d5;color:#0a1837}
 @media(prefers-reduced-motion:reduce){.floatingReaction,.houseMarkers,.hotelMarker,.limeEvent{animation:none!important}}
+
+/* v16.1 UX: subasta viva, negociación de tarjetas y temas corregidos */
+.auctionDialog,.tradeDialog{background:linear-gradient(160deg,#f9fcff,#e8f2ff)!important;border:3px solid #8ebcff!important;color:#162b43!important;text-shadow:none!important;box-shadow:0 28px 100px #000b!important;gap:12px!important;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain}
+.auctionDialog{width:min(510px,95vw)}
+.tradeDialog{width:min(790px,96vw);max-height:94dvh;align-items:stretch!important;text-align:left!important;padding:22px!important}
+.auctionDialog h2,.tradeDialog h2{color:#142b46!important;text-shadow:none!important;font-size:clamp(21px,3vw,30px)}
+.auctionDialog p,.tradeDialog p,.auctionDialog small,.tradeDialog small{color:#40556e!important;text-shadow:none!important;line-height:1.4}
+.auctionDialog .cardTop,.tradeDialog .cardTop{align-self:center;background:#214b73!important;color:#fff!important;border-radius:100px;padding:9px 18px;letter-spacing:1.5px}
+.auctionAmount{display:flex;flex-direction:column;align-items:center;gap:4px;background:#e3f3ed;border:1px solid #a9dbc9;border-radius:18px;padding:12px 25px;width:100%}
+.auctionAmount strong{color:#087e57!important;font-size:clamp(34px,6vw,50px)!important;line-height:1.1}
+.auctionAmount small{font-weight:900;letter-spacing:1px;color:#28745e!important}
+.auctionAmount span{font-weight:800;color:#294962}
+.auctionPlayers span{background:#d9e7f7!important;color:#193d60!important;border:1px solid #b4c9de;padding:8px 11px;border-radius:12px}
+.auctionPlayers span.leading{border-color:#16a37c;background:#d2f5e8!important}
+.auctionPlayers span.out{opacity:.65;text-decoration:line-through}
+.auctionHint{font-size:13px;font-weight:850;color:#29445e}
+.bidSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
+.bidStep{background:linear-gradient(180deg,#ffcb78,#f5a447)!important;color:#1b3046!important;border:1px solid #d88a35!important;border-radius:14px;min-height:78px;padding:11px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;box-shadow:0 5px 0 #bf7729;transition:transform .18s,box-shadow .18s}
+.bidStep b{font-size:17px}.bidStep small{font-size:11px;color:#61401a!important}
+.bidStep:not(:disabled):active{transform:translateY(4px);box-shadow:0 1px 0 #bf7729}
+.bidStep:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.auctionPass{width:100%;background:#274363!important;color:white!important;border-radius:12px;padding:11px;font-weight:800}
+.auctionWaiting{background:#d6f4e7;color:#205b47;border-radius:12px;padding:12px;font-weight:850;line-height:1.45}
+.tradeSectionTitle{color:#213e5c;font-size:12px;font-weight:950;letter-spacing:.6px;text-transform:uppercase;margin:5px 0 2px}
+.tradePlayers{display:flex;flex-wrap:wrap;gap:9px}
+.tradePlayer{display:flex;align-items:center;gap:9px;min-width:140px;min-height:63px;padding:9px 12px;border:2px solid #b6c7d9;border-radius:15px;background:white;color:#152f4b;cursor:pointer}
+.tradePlayer span{font-size:27px}.tradePlayer b{font-size:14px}.tradePlayer small{margin-left:auto}
+.tradePlayer.picked{border-color:#119d7b;background:#d9f6ec;box-shadow:0 0 0 2px #64d8ba5c}
+.tradeColumns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
+.tradeColumn{display:flex;flex-direction:column;gap:7px;min-width:0}
+.tradePropertyList{display:flex;flex-wrap:wrap;align-content:flex-start;gap:7px;max-height:170px;overflow:auto;background:#dce9f5;border:1px solid #b7cbe0;border-radius:13px;padding:9px;min-height:64px}
+.tradeProperty{position:relative;background:white;color:#17324c;border:2px solid #c6d1da;border-radius:11px;padding:7px 9px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:105px;max-width:165px;cursor:pointer;overflow:hidden;text-align:left}
+.tradeProperty .tradeColor{position:absolute;left:0;top:0;right:0;height:5px;background:var(--trade-color,#61c7af)}
+.tradeProperty b{font-size:12px;overflow-wrap:anywhere;line-height:1.15;margin-top:3px}
+.tradeProperty small{font-size:10px}
+.tradeProperty.picked{border-color:#128e74;background:#e0faef;box-shadow:inset 0 0 0 1px #59ca9f}
+.tradeProperty.none{justify-content:center}
+.tradeMoneyGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.tradeMoneyGrid label{display:flex;flex-direction:column;gap:6px;font-weight:800;color:#2b4663;font-size:12px}
+.tradeMoneyGrid input{background:white!important;border:1px solid #a6bdd4!important;color:#142a43!important;font-size:16px;font-weight:800}
+.tradeSummary{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:6px;align-items:center;width:100%;background:#d9f0ea;border:1px solid #8bcabc;padding:11px;border-radius:14px}
+.tradeSummary>div:not(.tradeArrow){display:flex;flex-direction:column;gap:3px;min-width:0}
+.tradeSummary small{font-size:10px;letter-spacing:1px;color:#36705e!important;font-weight:800}
+.tradeSummary b{font-size:12px;color:#173f33;overflow-wrap:anywhere}
+.tradeArrow{font-size:23px;color:#0a8269;font-weight:900}
+.tradeDialog .primary{width:100%;padding:13px}.tradeDialog .tradeCancel{width:100%}
+/* Clásico: corregir textos heredados en claro y contraste en paneles sin afectar el tablero */
+.theme-classic{color:#263647}
+.theme-classic .game{background:linear-gradient(145deg,#efe6d0,#dcebe1);color:#233448}
+.theme-classic .gameTop,.theme-classic .sidebar .panel{background:#fffaf0!important;border:1px solid #c9b38b!important;color:#243850!important;box-shadow:0 8px 22px #5b4a3023}
+.theme-classic .gameTop h2,.theme-classic .sidebar h3,.theme-classic .sidebar .panel strong,.theme-classic .sidebar .panel b{color:#273f56!important;text-shadow:none!important}
+.theme-classic .gameTop .eyebrow{color:#167e70!important;text-shadow:none!important}
+.theme-classic .sidebar .panel p,.theme-classic .sidebar .panel small,.theme-classic .sidebar .panel span{color:#43576c!important;text-shadow:none!important}
+.theme-classic .sidebar .player,.theme-classic .playerCard{background:#f0f3e9!important;color:#243c52!important;border-color:#c8cbb6!important}
+.theme-classic .sidebar .player.active,.theme-classic .sidebar .player.current{background:#daece6!important;border-color:#1c957f!important}
+.theme-classic .sidebar .player .cash,.theme-classic .sidebar .player strong{color:#087650!important}
+.theme-classic .sidebar .panel .primary{background:linear-gradient(110deg,#ffc36a,#f59b47)!important;color:#203044!important}
+.theme-classic .sidebar .panel button:not(.primary):not(.tokenChoice):not(.bidStep){color:#233b54}
+.theme-classic .sidebar .panel .secondary{background:#dbe9ee!important;color:#254059!important}
+.theme-classic .gameTopActions .secondary,.theme-classic .themeSelect{background:#2b506a!important;color:white!important;border-color:#6f8c9b!important}
+.theme-classic .gameTopActions .exitGameBtn{background:#a84e43!important;color:#fff!important}
+.theme-classic .reactionBar button{background:#e2edf2!important}
+.theme-classic .sidebar .log p,.theme-classic .sidebar .ownedItem{color:#263e54!important}
+@media(max-width:600px){.tradeDialog{padding:14px!important}.tradePropertyList{max-height:145px}.tradePlayer{min-width:110px}.bidStep{min-height:66px}.bidStep b{font-size:14px}.bidStep small{font-size:9px}}
+@media (orientation:landscape) and (max-height:430px) and (pointer:coarse){.auctionDialog,.tradeDialog{padding:12px 16px!important;gap:6px!important}.auctionAmount{padding:5px}.auctionAmount strong{font-size:26px!important}.bidStep{min-height:47px;padding:6px}.tradePlayers{gap:5px}.tradePlayer{min-height:42px}.tradePropertyList{max-height:76px}.tradeSummary{padding:7px}.tradeDialog h2,.auctionDialog h2{font-size:20px}.tradeDialog .cardTop,.auctionDialog .cardTop{padding:4px 12px}}

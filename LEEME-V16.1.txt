@@ -1,0 +1,7 @@
+LIMA CITY v16.1 – SUBASTAS Y NEGOCIACIONES
+
+Subastas: pujas incrementales +10, +20, +40; puedes contraofertar varias veces. Pasar elimina al jugador. Cuando queda un solo postor se adjudica automáticamente; si todos pasan sin ofertas, nadie compra. No necesita botón de adjudicación.
+Intercambio: jugadores y propiedades como tarjetas clicables, resumen y valores de dinero.
+Tema clásico: contraste general corregido; diálogos claros y legibles en todos los temas.
+Conserva reglas previas, Firebase y formato horizontal.
+Sube todos los archivos de este ZIP al repositorio, confirma el commit, espera Vercel Ready y comienza una partida NUEVA para probar el nuevo protocolo de subasta.
