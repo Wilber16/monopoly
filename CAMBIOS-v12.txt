@@ -1,0 +1,1 @@
+v12: Tarjeta de propiedad con botones COMPRAR/RECHAZAR solo para el jugador que cayó en ella. El otro jugador ve CONTINUAR PARTIDA. Al comprar/rechazar se cierra el anuncio para todos via Firebase. Rediseño visual: tablero claro, centro limeño, botones, paneles y animaciones.
