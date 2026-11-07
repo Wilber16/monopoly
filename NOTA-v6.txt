@@ -1,0 +1,1 @@
+Corrección v6: Firebase Realtime Database omite objetos vacíos como game.properties. La interfaz ahora lo tolera y el motor lo inicializa antes de cada acción. Reemplazar archivos en GitHub y esperar Vercel Ready. No modificar reglas de Firebase.
