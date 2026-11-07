@@ -37,3 +37,6 @@ LIMA CITY es un proyecto independiente, con nombres, diseño y tablero propios; 
 
 ## Corrección v3
 Se consulta la sala con `get()` antes de iniciar la transacción de ingreso. Esto evita que la transacción se cancele inmediatamente cuando la caché local todavía no tiene la sala.
+
+## v4: ingreso a salas
+La transacción usa el resultado de get() como base cuando Firebase inicia con caché vacía; distingue fallos de lectura, estado y escritura. Reglas actuales solo para partidas privadas de prueba, no resistentes a trampas.
