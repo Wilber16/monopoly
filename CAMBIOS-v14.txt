@@ -1,0 +1,7 @@
+LIMA CITY v14
+- Corrección de cartas invisibles: identificadores únicos persistentes para cada carta y cada aviso, aunque el anterior se haya cerrado.
+- Mis propiedades agrupadas visualmente por color y tipo, con contador.
+- Pozo de DESCANSO visible con billetes en el centro. Los impuestos, multas y cartas de pago al banco se acumulan en el pozo; quien cae en DESCANSO cobra el total.
+- Selector de 12 fichas antes de crear o unirse a la sala, y también dentro del lobby. La ficha elegida se sincroniza.
+- Crear partida nueva para probar el pozo y las fichas.
+- No cambiar reglas de Firebase.
