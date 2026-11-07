@@ -1,0 +1,1 @@
+Corrige TypeError reading 0: normaliza dice, players, properties y log provenientes de Firebase antes de renderizar. Protege accesos al jugador y dados. Actualizar GitHub y Vercel; no cambiar reglas Firebase.
