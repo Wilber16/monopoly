@@ -1,0 +1,1 @@
+32 cartas originales: 16 Arca Comunal y 16 Fortuna Limeña. Mazos barajados sin repetición hasta agotarse. Acciones: cobros, pagos, cobro/pago a otros jugadores, traslado, retroceso y comisaría. Se conservan las variables de Firebase. Publicar los archivos en GitHub y esperar Vercel Ready. Probar con una sala nueva.

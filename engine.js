@@ -9,7 +9,58 @@ const next=(g)=>{let n=g.turn;do{n=(n+1)%g.players.length}while(g.players[n].ban
 const owns=(g,id)=>g.properties[id];
 const rent=(g,id)=>{let b=board[id],pr=owns(g,id);if(!pr)return 0;if(b.kind==='transport')return 25*Math.pow(2,Object.keys(g.properties).filter(k=>board[k].kind==='transport'&&g.properties[k].owner===pr.owner).length-1);if(b.kind==='utility')return 35;return Math.round(b.price*(.10+pr.houses*.45));};
 function transfer(g,from,to,amount){let p=g.players.find(p=>p.id===from);if(!p)return;p.cash-=amount;if(to){let q=g.players.find(p=>p.id===to);if(q)q.cash+=amount;}if(p.cash<0){p.bankrupt=true;for(let k of Object.keys(g.properties)){if(g.properties[k].owner===p.id)delete g.properties[k]}log(g,`${p.name} quedó en bancarrota`);let active=g.players.filter(x=>!x.bankrupt);if(active.length===1){g.winner=active[0].id;g.phase='finished';log(g,`🏆 ${active[0].name} ganó Lima City`)}}}
-function resolve(g,p){let b=board[p.pos],pr=owns(g,p.pos);if(b.kind==='property'||b.kind==='transport'||b.kind==='utility'){if(pr){if(pr.owner!==p.id&&!pr.mortgaged){let r=rent(g,p.pos);transfer(g,p.id,pr.owner,r);log(g,`${p.name} pagó ${money(r)} por ${b.name}`)}}else{g.phase='decision';log(g,`${p.name} puede comprar ${b.name} por ${money(b.price)}`)}}else if(b.kind==='tax'){let v=p.pos===4?100:150;transfer(g,p.id,null,v);log(g,`${p.name} pagó ${money(v)} de impuestos`)}else if(b.kind==='chance'||b.kind==='community'){let cards=[['Ganaste un concurso barrial',100],['Reparaciones inesperadas',-80],['Bono de emprendimiento',150],['Multa de tránsito',-60],['Premio de la municipalidad',75],['Gastos de mantenimiento',-100]];let [msg,amt]=cards[Math.floor(Math.random()*cards.length)];if(amt>=0)p.cash+=amt;else transfer(g,p.id,null,-amt);log(g,`${msg}: ${amt>=0?'+':''}${money(amt)}`)}else if(p.pos===30){p.pos=10;p.jail=1;log(g,`${p.name} fue enviado a la comisaría`)}else if(p.pos===20){p.cash+=50;log(g,`${p.name} recibió ${money(50)} por descansar`)}}
+const decks={
+ community:[
+ {title:'Fondo de ahorro',description:'Recuperas dinero de tu fondo comunal.',amount:200,emoji:'🏦'},
+ {title:'Consulta médica',description:'Pagas gastos de atención médica.',amount:-50,emoji:'🩺'},
+ {title:'Premio del vecindario',description:'Tu barrio premia tu iniciativa.',amount:100,emoji:'🏆'},
+ {title:'Colecta vecinal',description:'Aportas a una causa comunitaria.',amount:-50,emoji:'🤝'},
+ {title:'Cumpleaños limeño',description:'Cada jugador te regala S/ 20.',type:'collectEach',amount:20,emoji:'🎂'},
+ {title:'Apoyo a tus vecinos',description:'Entregas S/ 20 a cada jugador.',type:'payEach',amount:20,emoji:'💝'},
+ {title:'Beca municipal',description:'Recibes una beca de formación.',amount:150,emoji:'🎓'},
+ {title:'Reparación de vereda',description:'Colaboras con la reparación del barrio.',amount:-40,emoji:'🧱'},
+ {title:'Devolución bancaria',description:'Recibes un reembolso inesperado.',amount:75,emoji:'💳'},
+ {title:'Herencia familiar',description:'Recibes una herencia.',amount:100,emoji:'📜'},
+ {title:'Campaña de reciclaje',description:'Tu participación recibe una recompensa.',amount:50,emoji:'♻️'},
+ {title:'Mantenimiento de parques',description:'Pagas una contribución.',amount:-80,emoji:'🌳'},
+ {title:'Voluntariado reconocido',description:'Recibes un incentivo por tu ayuda.',amount:60,emoji:'🙌'},
+ {title:'Aporte escolar',description:'Colaboras con materiales para una escuela.',amount:-50,emoji:'📚'},
+ {title:'Visita a la comisaría',description:'Ve a la comisaría sin cobrar por SALIDA.',type:'jail',emoji:'🚓'},
+ {title:'Vuelve a SALIDA',description:'Avanza a SALIDA y cobra S/ 200.',type:'move',target:0,emoji:'🚩'}
+ ],
+ chance:[
+ {title:'¡Rumbo a Miraflores!',description:'Avanza hasta Miraflores.',type:'move',target:38,emoji:'🌊'},
+ {title:'Avanza a SALIDA',description:'Cobra S/ 200 al llegar.',type:'move',target:0,emoji:'🚩'},
+ {title:'Visita la comisaría',description:'Ve directamente a la comisaría.',type:'jail',emoji:'🚓'},
+ {title:'Viaje a Barranco',description:'Trasládate a Barranco.',type:'move',target:31,emoji:'🎨'},
+ {title:'Visita San Isidro',description:'Avanza hasta San Isidro.',type:'move',target:39,emoji:'🏙️'},
+ {title:'Papeleta de tránsito',description:'Pagas una multa.',amount:-100,emoji:'🚦'},
+ {title:'Concurso de emprendimiento',description:'Ganaste un concurso.',amount:150,emoji:'🥇'},
+ {title:'Impuesto extraordinario',description:'Pagas un cargo inesperado.',amount:-75,emoji:'🧾'},
+ {title:'Campaña publicitaria',description:'Tu negocio recibe más clientes.',amount:100,emoji:'📣'},
+ {title:'Reparación del auto',description:'Debes pagar el taller.',amount:-120,emoji:'🔧'},
+ {title:'Retrocede tres casillas',description:'Retrocede tres espacios en el tablero.',type:'back',steps:3,emoji:'↩️'},
+ {title:'Adelanta a Jesús María',description:'Avanza hasta Jesús María.',type:'move',target:21,emoji:'🏘️'},
+ {title:'Premio de la feria',description:'Ganaste un sorteo limeño.',amount:200,emoji:'🎟️'},
+ {title:'Gastos de transporte',description:'Pagas pasajes y movilidad.',amount:-50,emoji:'🚌'},
+ {title:'Bono de temporada',description:'Recibes un bono especial.',amount:75,emoji:'🎁'},
+ {title:'Cobro por servicios',description:'Cada jugador te paga S/ 25.',type:'collectEach',amount:25,emoji:'💰'}
+ ]
+};
+const shuffle=a=>{let v=[...a];for(let i=v.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[v[i],v[j]]=[v[j],v[i]]}return v};
+function draw(g,deck){g.cardDecks??={};if(!g.cardDecks[deck]?.length)g.cardDecks[deck]=shuffle(decks[deck].map((_,i)=>i));return decks[deck][g.cardDecks[deck].shift()]}
+function applyCard(g,p,card){
+ if(card.type==='jail'){p.pos=10;p.jail=1;log(g,`${p.name} fue a la comisaría`)}
+ else if(card.type==='move'||card.type==='back'){
+  const old=p.pos;const target=card.type==='back'?(p.pos-card.steps+40)%40:card.target;
+  p.pos=target;if(card.type==='move'&&target<=old){p.cash+=200;log(g,`${p.name} cobró ${money(200)} por pasar por SALIDA`)}
+  log(g,`${p.name} avanzó a ${board[p.pos].name}`);resolve(g,p,false)
+ }else if(card.type==='collectEach'||card.type==='payEach'){
+  for(const other of g.players){if(other.id===p.id||other.bankrupt)continue;if(card.type==='collectEach')transfer(g,other.id,p.id,card.amount);else transfer(g,p.id,other.id,card.amount)}
+  log(g,`${p.name}: ${card.title}`)
+ }else{const amt=card.amount;if(amt>=0)p.cash+=amt;else transfer(g,p.id,null,-amt);log(g,`${card.title}: ${amt>=0?'+':''}${money(amt)}`)}
+}
+function resolve(g,p,allowCard=true){let b=board[p.pos],pr=owns(g,p.pos);if(b.kind==='property'||b.kind==='transport'||b.kind==='utility'){if(pr){if(pr.owner!==p.id&&!pr.mortgaged){let r=rent(g,p.pos);transfer(g,p.id,pr.owner,r);log(g,`${p.name} pagó ${money(r)} por ${b.name}`)}}else{g.phase='decision';log(g,`${p.name} puede comprar ${b.name} por ${money(b.price)}`)}}else if(b.kind==='tax'){let v=p.pos===4?100:150;transfer(g,p.id,null,v);log(g,`${p.name} pagó ${money(v)} de impuestos`)}else if((b.kind==='chance'||b.kind==='community')&&allowCard){let deck=b.kind==='chance'?'chance':'community';let card=draw(g,deck);applyCard(g,p,card);g.lastCard={...card,deck,playerId:p.id,playerName:p.name,revision:(g.lastCard?.revision||0)+1};}else if(p.pos===30){p.pos=10;p.jail=1;log(g,`${p.name} fue enviado a la comisaría`)}else if(p.pos===20){p.cash+=50;log(g,`${p.name} recibió ${money(50)} por descansar`)}}
 export function apply(input,action){let g=structuredClone(input);g.properties ??= {};g.dice ??= [1,1];g.log ??= [];if(g.winner)return g;let p=g.players[g.turn];if(action.playerId!==p.id)return input;
 if(action.type==='roll'&&g.phase==='roll'){let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6);g.dice=[a,b];if(p.jail){p.jail=0;log(g,`${p.name} salió de la comisaría y pierde este turno`);g.phase='end'}else{let old=p.pos;p.pos=(p.pos+a+b)%40;if(p.pos<old){p.cash+=200;log(g,`${p.name} cobró ${money(200)} por pasar por SALIDA`)}log(g,`${p.name} sacó ${a} y ${b} y llegó a ${board[p.pos].name}`);g.phase='end';resolve(g,p)}}
 else if(action.type==='buy'&&g.phase==='decision'){let b=board[p.pos];if(!owns(g,p.pos)&&p.cash>=b.price){p.cash-=b.price;g.properties[p.pos]={owner:p.id,houses:0,mortgaged:false};log(g,`${p.name} compró ${b.name}`);g.phase='end'}}

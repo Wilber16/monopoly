@@ -1,0 +1,1 @@
+Cartas animadas de Comunidad y Suerte Limeña. 6 cartas originales por mazo. Efecto económico aplicado una vez en el motor, carta sincronizada en Firebase y ventana visible en ambos dispositivos. Subir archivos a GitHub y esperar Vercel Ready. No cambiar reglas Firebase.
