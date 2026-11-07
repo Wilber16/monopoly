@@ -1,0 +1,1 @@
+v15: Hipoteca guiada desde tarjeta de compra cuando falta dinero; salir y crear nueva sala; pantalla de victoria con mensaje Ganó la delincuencia y nombre del ganador. La música se plantea como mejora futura; no se incorpora audio externo sin licencia.
