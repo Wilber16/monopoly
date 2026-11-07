@@ -1,0 +1,1 @@
+v11: sincronización de cierre de cartas por jugador activo; avisos de impuestos, alquiler, propiedad y cárcel; salir de cárcel pagando S/50 o sacando dobles, cobro automático tras tercer intento fallido; animaciones de tablero/fichas; construcción equilibrada de 4 casas y luego hotel con monopolio de color; ficha de propiedad con tabla de alquileres.
