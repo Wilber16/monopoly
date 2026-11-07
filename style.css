@@ -103,3 +103,110 @@ header{position:relative;z-index:2;background:#0b1a2de8;border-bottom:1px solid 
 .victoryToken{font-size:70px;margin:12px 0}.victoryDialog p{margin-bottom:20px}.victoryDialog button{width:100%}
 @keyframes victoryPop{from{opacity:0;transform:scale(.7) rotate(-5deg)}to{opacity:1;transform:scale(1) rotate(0)}}@keyframes victoryBounce{50%{transform:translateY(-12px)}}
 @media(max-width:640px){.gameTopActions{justify-content:flex-start}.mortgageDialog{padding:18px}}
+
+/* LIMA CITY v16 · videojuego horizontal + funciones sociales */
+.gameTabs{display:none}.landscapeHint{display:none}
+.themeSelect{border:1px solid #e9c47880;border-radius:11px;background:#223e56;color:#fff;padding:9px;font-weight:750;max-width:155px}
+.theme-classic{--theme-accent:#d89140;filter:none}
+.theme-classic .game{background:linear-gradient(135deg,#e5d8b6,#e6f1df);border-radius:15px}
+.theme-classic .gameTop,.theme-classic .sidebar .panel{background:#fff6df;color:#3c3628;border-color:#cda66b}
+.theme-classic .sidebar .panel p,.theme-classic .sidebar .panel small{color:#6c5d46}
+.theme-classic .board{background:#f1f2d7;border-color:#aa8450}
+.theme-neon .game{background:radial-gradient(circle at 50% 20%,#1b265d,#080d22 80%);border-radius:16px}
+.theme-neon .board{border-color:#14e5e5;box-shadow:0 0 28px #08ffeb75,0 15px 55px #0009}
+.theme-neon .sidebar .panel{border-color:#a95dff;box-shadow:inset 0 0 12px #8022fa25,0 0 16px #6f3df62e}
+.theme-neon .gameTop{border-color:#ff62c5}
+.houseMarkers,.hotelMarker{display:inline-block;animation:houseGrow .4s cubic-bezier(.2,1.7,.3,1) both;filter:drop-shadow(0 2px 1px #0005)}
+@keyframes houseGrow{from{transform:scale(.25) translateY(12px);opacity:0}to{transform:scale(1);opacity:1}}
+.reactionBar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.reactionBar button{font-size:23px;background:#ffffff12;border:1px solid #ffffff22;border-radius:9px;min-width:35px;padding:5px;cursor:pointer;transition:transform .15s}
+.reactionBar button:hover{transform:scale(1.2)}
+.socialPanel{display:flex;flex-direction:column;gap:8px}
+.floatingReaction{position:fixed;z-index:1200;left:48%;top:25%;pointer-events:none;display:flex;flex-direction:column;align-items:center;animation:reactionFloat 3s ease-out both;text-shadow:0 4px 10px #000a}
+.floatingReaction span{font-size:80px}.floatingReaction small{background:#14253ddd;color:#fff;padding:4px 12px;border-radius:20px;font-weight:800}
+@keyframes reactionFloat{0%{transform:translateY(35px) scale(.4);opacity:0}20%{opacity:1;transform:translateY(0) scale(1.1)}75%{opacity:1}100%{transform:translateY(-85px) scale(.9);opacity:0}}
+.limeEvent{animation:cardEnter .5s cubic-bezier(.18,1.3,.32,1) both}
+.auctionDialog,.tradeDialog{max-height:90dvh;overflow:auto}
+.auctionDialog input,.tradeDialog input,.tradeDialog select{width:100%;min-height:38px;border-radius:9px;border:1px solid #9eafc3;background:#fff;color:#142b3f;padding:8px}
+.tradeDialog label{display:block;align-self:stretch;text-align:left;font-size:12px;font-weight:800;margin-bottom:-8px}
+.auctionPlayers{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.auctionPlayers span{background:#ffffffaa;border-radius:8px;padding:5px 9px;font-size:11px;font-weight:800}
+@media (max-width:950px) and (orientation:portrait){.landscapeHint{display:block;text-align:center;padding:9px 12px;margin-bottom:10px;border:1px solid #f2c46c88;border-radius:12px;background:#5c48275c;color:#ffe1a1;font-weight:750;font-size:12px}}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse){
+ html,body,#root{min-height:100%;overflow-x:hidden}
+ .app:has(.game){min-height:100dvh}
+ .game{max-width:none;width:100%;height:100dvh;padding:7px 9px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+ .gameTop{margin:0;padding:5px 10px;min-height:37px;flex-shrink:0;gap:6px;border-radius:10px}
+ .gameTop .eyebrow{font-size:9px;letter-spacing:1px}
+ .gameTop h2{font-size:13px;margin:2px 0}
+ .gameTopActions{gap:5px;flex-wrap:nowrap}
+ .gameTopActions button,.gameTopActions select{padding:6px 8px;font-size:10px;white-space:nowrap}
+ .gameLayout{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(225px,34%);gap:10px;align-items:stretch;justify-items:center}
+ .board{width:auto;height:100%;max-width:100%;aspect-ratio:1;min-width:0;min-height:0;justify-self:center;align-self:center;border-width:4px;border-radius:10px}
+ .tile .stripe{min-height:2px}
+ .tileName{font-size:clamp(5px,1.1vh,10px);margin-top:1px;line-height:1.05;padding:0 1px;overflow-wrap:normal;word-break:normal;hyphens:auto}
+ .tile small{font-size:clamp(4px,.9vh,8px);margin-bottom:1px}
+ .corner .tileName{font-size:clamp(6px,1.2vh,10px)}
+ .tokens{font-size:clamp(8px,2.6vh,15px);top:35%}
+ .owner{font-size:8px;line-height:1}
+ .boardCenter{padding:4px;gap:1px}
+ .boardCenterTag,.boardCenterStamp{font-size:7px!important;padding:2px 4px!important}
+ .boardCenter .cityscape{font-size:22px!important;line-height:1}
+ .boardCenter h1{font-size:clamp(25px,6.8vh,53px);margin:1px 0}
+ .boardCenter>span{font-size:7px}
+ .boardCenter p,.centerDecor{display:none}
+ .dice{margin:5px;gap:7px}
+ .dice b{width:clamp(26px,6.5vh,40px);height:clamp(26px,6.5vh,40px);font-size:21px;border-radius:8px}
+ .potDisplay{margin:4px auto;padding:5px 8px;gap:0;border-width:1px;border-radius:9px}
+ .potDisplay .potBills{font-size:16px}
+ .potDisplay strong{font-size:8px}
+ .potDisplay b{font-size:16px}
+ .potDisplay small{font-size:8px}
+ .sidebar{display:flex;flex-direction:column;gap:6px;min-height:0;height:100%;width:100%;overflow-y:auto;overscroll-behavior:contain;padding:1px 3px 6px 1px}
+ .sidebar .panel{padding:10px 12px;border-radius:11px}
+ .sidebar h3{font-size:13px;margin:0 0 6px}
+ .sidebar .actions{order:0;flex-shrink:0;position:sticky;top:0;z-index:6;box-shadow:0 5px 14px #0007}
+ .sidebar .actions p{margin:3px 0 8px;font-size:11px}
+ .sidebar .actions .primary,.sidebar .actions .secondary{padding:10px 12px;font-size:13px}
+ .gameTabs{order:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;position:sticky;top:0;z-index:5;background:#0c1b2d;padding:3px 0}
+ .gameTabs button{font-size:10px;font-weight:800;color:#c6d5e9;border-radius:8px;background:#223854;padding:8px 2px}
+ .gameTabs button.active{background:#ffbc69;color:#152b40}
+ .sidebar .playerPanel,.sidebar .propertiesPanel,.sidebar .logPanel{display:none;order:2}
+ .sidebar .hudActive{display:block}
+ .sidebar .socialPanel{order:3;flex-shrink:0}
+ .sidebar .socialPanel .reactionBar button{font-size:17px;min-width:29px;padding:3px}
+ .playerList{gap:4px}.player{padding:5px 7px}.avatar{font-size:20px}
+ .ownedList{max-height:none}.log{max-height:none}
+ .infoBar{bottom:8px;max-width:85%;padding:8px}
+ .eventCard,.propertyDetail,.mortgageDialog{max-height:94dvh;overflow-y:auto}
+}
+@media (orientation:landscape) and (max-height:420px) and (pointer:coarse){
+ .game{padding:3px 6px;gap:3px}.gameTop{min-height:30px;padding:3px 8px}
+ .gameTop .eyebrow{display:none}.gameTop h2{font-size:12px}
+ .gameLayout{gap:6px;grid-template-columns:minmax(0,1fr) minmax(200px,35%)}
+ .boardCenterTag,.boardCenterStamp{display:none!important}
+ .boardCenter .cityscape{display:none}
+ .potDisplay .potBills,.potDisplay small{display:none}
+ .sidebar .panel{padding:7px 9px}.sidebar h3{font-size:12px}
+}
+
+/* Refinamientos de compatibilidad / legibilidad v16 */
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse){
+ .board{flex-shrink:1}
+ .sidebar .actions{z-index:7}
+ .sidebar .socialPanel{padding:6px 8px}
+ .sidebar .socialPanel .reactionBar{gap:3px}
+ .sidebar .socialPanel .reactionBar button{font-size:clamp(14px,3.4vh,19px);min-width:27px;min-height:26px}
+ .eventCard{max-height:calc(100dvh - 16px);overflow-y:auto;gap:8px;padding:12px 18px}
+ .eventCard .cardEmoji{font-size:clamp(22px,8vh,56px)}
+ .eventCard h2{font-size:clamp(16px,5vh,29px)}
+ .eventCard p{font-size:clamp(11px,3.5vh,16px)}
+ .eventCard .primary{padding:9px 12px}
+ .themeSelect{max-width:104px}
+}
+.theme-classic .gameTabs{background:#f3e5c5}
+.theme-classic .gameTabs button{background:#e4d0a1;color:#40301c}
+.theme-classic .gameTabs button.active{background:#b96b28;color:white}
+.theme-classic .socialPanel .reactionBar button{background:#dfc491}
+.theme-neon .gameTabs button.active{background:#59e8d5;color:#0a1837}
+@media(prefers-reduced-motion:reduce){.floatingReaction,.houseMarkers,.hotelMarker,.limeEvent{animation:none!important}}

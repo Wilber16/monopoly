@@ -1,0 +1,22 @@
+LIMA CITY v16 PLUS — VIDEOJUEGO HORIZONTAL
+
+MEJORAS
+1. SUBASTAS: Si alguien rechaza una propiedad, se abre una subasta para jugadores activos. Cada uno puede realizar UNA oferta (mínimo S/ 10 y al menos S/ 10 por encima de la anterior) o pasar. Cuando todos participen, el jugador del turno adjudica la propiedad al mejor postor.
+2. INTERCAMBIOS: El jugador del turno puede proponer un intercambio de propiedades y/o dinero; el destinatario acepta o rechaza. No se intercambian propiedades con casas u hoteles ni grupos que tengan edificaciones.
+3. CONSTRUCCIONES: Las casas y hoteles se representan sobre las casillas con iconos animados. Se mantienen los requisitos de grupo de color y construcción equilibrada.
+4. EVENTOS: Arca Comunal, Fortuna Limeña y avisos de comisaría tienen ventanas visuales animadas.
+5. TEMAS: Nocturna, Clásica y Neón, seleccionables durante la partida y guardados por dispositivo.
+6. REACCIONES: Emojis entre jugadores sincronizados en Firebase.
+7. FORMATO HORIZONTAL: En celular girado horizontalmente, tablero cuadrado y panel lateral con pestañas Jugadores/Propiedades/Historial.
+
+INSTALAR
+1. Descomprime el ZIP.
+2. Sube los archivos de la carpeta a la RAIZ de tu repositorio de GitHub. Reemplaza los anteriores; no subas una carpeta anidada.
+3. Espera que Vercel indique Ready y abre una partida NUEVA con al menos dos jugadores.
+4. NO cambies reglas de Firebase ni variables de entorno: conserva las que ya funcionan.
+
+PRUEBAS
+- Motor JS: sintaxis verificada con Node; escenarios probados de subasta, deserialización Firebase de objeto vacío, adjudicación, propuesta y aceptación de intercambio, y reacciones.
+- No se ha podido ejecutar la compilación Vite con dependencias instaladas ni una prueba de dispositivos reales en esta sesión. Prueba antes de usar en una partida importante.
+- Las subastas siguen un modelo sencillo por ronda: cada jugador decide una vez por subasta (ofertar o pasar).
+- La partida que ya esté iniciada con una versión anterior puede no tener datos compatibles con estas funciones: crea una sala nueva.
