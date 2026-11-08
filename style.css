@@ -713,3 +713,77 @@ header { border-bottom:2px solid #2bbeb487; background:linear-gradient(95deg,#0a
 .playerLobby .tokenGem{width:60px;height:60px;padding:2px}
 .auctionPlayers .tokenFigure{width:28px;height:28px;display:inline-block;vertical-align:middle}
 @media(max-width:700px){.tokenGallery{grid-template-columns:repeat(3,minmax(0,1fr))}.tokenGallery .tokenArt{height:60px;min-height:60px}.tokenGallery .tokenChoice{min-height:102px!important}}
+
+
+/* v17.3.2: logo chicha PNG centrado en la escena, elevado sobre el HUD. */
+.board .boardCenter{position:relative!important;isolation:isolate!important;}
+.board .boardCenter .centerBrand{
+ position:absolute!important;
+ top:7%!important;
+ left:50%!important;
+ transform:translateX(-50%)!important;
+ width:100%!important;
+ height:61%!important;
+ max-height:61%!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ gap:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ z-index:3!important;
+ pointer-events:none;
+}
+.board .boardCenter .limaCityLogoPng{
+ display:block;
+ width:min(56%,520px)!important;
+ height:91%!important;
+ max-height:91%!important;
+ object-fit:contain!important;
+ object-position:center center!important;
+ margin:0 auto!important;
+ filter:drop-shadow(0 7px 10px #020b20a8);
+ user-select:none;
+}
+.board .boardCenter .centerBrand .centerTagline{
+ display:block!important;
+ flex:none!important;
+ margin:-1% 0 0!important;
+ padding:4px 10px!important;
+ font-size:clamp(7px,.77vw,11px)!important;
+ white-space:nowrap;
+ letter-spacing:1.4px;
+ max-width:95%;
+}
+.board .boardCenter .centerHud{
+ position:absolute!important;
+ left:50%!important;
+ bottom:7.3%!important;
+ transform:translateX(-50%)!important;
+ width:min(84%,640px)!important;
+ max-width:92%!important;
+ margin:0!important;
+ z-index:6!important;
+}
+.board .boardCenter .boardCenterStamp{
+ position:absolute!important;
+ bottom:1%!important;
+ left:0!important;
+ right:0!important;
+ margin:0!important;
+ z-index:3!important;
+}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse){
+ .board .boardCenter .centerBrand{top:4%!important;height:65%!important;max-height:65%!important;}
+ .board .boardCenter .limaCityLogoPng{width:min(54%,390px)!important;height:90%!important;max-height:90%!important;}
+ .board .boardCenter .centerBrand .centerTagline{font-size:6px!important;padding:2px 5px!important;letter-spacing:.3px!important;}
+ .board .boardCenter .centerHud{bottom:4.4%!important;width:92%!important;}
+}
+@media(max-width:650px) and (orientation:portrait){
+ .board .boardCenter .centerBrand{top:5%!important;height:62%!important;}
+ .board .boardCenter .limaCityLogoPng{width:66%!important;height:91%!important;}
+ .board .boardCenter .centerBrand .centerTagline{font-size:6px!important;letter-spacing:.25px!important;padding:2px 4px!important;}
+ .board .boardCenter .centerHud{bottom:5%!important;width:94%!important;}
+}

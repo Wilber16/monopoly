@@ -1,0 +1,1 @@
+LIMA CITY v17.3.2 — Logo chicha PNG integrado en el centro superior del tablero. Logo transparente en public/lima-city-logo-chicha.png; se reemplazó el texto CSS antiguo. Los dados y el pozo permanecen abajo con separación visual. No se modifica engine.js, Firebase ni las reglas. Subir toda la carpeta public al actualizar GitHub.

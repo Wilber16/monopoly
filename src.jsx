@@ -88,11 +88,8 @@ return <div className={'app theme-'+theme+' board-'+boardView}><header><div clas
 <div className="cityGlow" aria-hidden="true"/>
 <div className="urbanHalo" aria-hidden="true"/>
 <div className="centerBrand">
-<div className="boardCenterTag">✦ ¡QUÉ VIVA LIMA! ✦</div>
-<div className="boardMiniSkyline" aria-hidden="true">🌴 🚌 🏙️ 🌴</div>
-<h1 className="chichaWordmark"><span>LIMA</span><strong>CITY</strong></h1>
+<img className="limaCityLogoPng" src="/lima-city-logo-chicha.png" alt="LIMA CITY" draggable="false"/>
 <span className="centerTagline">EL JUEGO DE LOS DISTRITOS</span>
-<div className="centerDecor">COSTA VERDE · PLAZA MAYOR · CERROS · BARRIOS</div>
 </div>
 <div className="centerHud">
 <div className="diceHud"><span>🎲 ÚLTIMA TIRADA</span><div className={'dice '+(rolling?'shake':'')}><b>{g.dice?.[0]??1}</b><b>{g.dice?.[1]??1}</b></div></div>
