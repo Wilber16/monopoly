@@ -1,0 +1,14 @@
+LIMA CITY v17 — LIMA MODERNA URBANA
+
+✓ 32 cartas de Suerte Limeña + 32 de Arca Comunal (64 total).
+✓ Nuevas mecánicas de cartas: siguiente transporte/servicio, reparaciones por casas/hoteles, pases de comisaría, premios, multas, movimientos y cobros entre jugadores.
+✓ Pase gratuito de comisaría guardado hasta su utilización.
+✓ Ocho grupos de propiedades con colores propios. Al tocar una casilla se ve su grupo y los distritos integrantes.
+✓ Diferenciación de colores de grupo de distrito y colores de propietario.
+✓ Estética Lima moderna urbana y tablero con profundidad CSS 2.5D.
+✓ Alternancia entre vista plana / vista 2.5D sin afectar el multijugador.
+✓ Catálogo de las 64 cartas consultable en el juego.
+✓ Se mantienen Firebase, las subastas (+10/+20/+40), negociaciones, jugadores, casas, hoteles y tres temas.
+
+INSTALACIÓN: subir todos los archivos a la raíz del repositorio actual en GitHub, confirmar cambios y esperar Vercel READY. Crear una sala nueva.
+VERIFICACIÓN: npm test, node --check engine.js, análisis/transpilación de JSX y sintaxis CSS correctos. Sin compilación completa de Vite ni prueba online en dispositivos.

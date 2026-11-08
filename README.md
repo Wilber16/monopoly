@@ -1,46 +1,40 @@
-# 🌆 LIMA CITY — Edición Perú
+# LIMA CITY v17 — Lima Moderna Urbana 🏙️🎲
 
-Juego web de compra de propiedades ambientado en distritos de Lima. Incluye tablero de 40 casillas, partidas privadas de 2 a 6 jugadores, dados, alquileres, casas/hoteles, hipotecas, impuestos, eventos y bancarrota.
+Actualización sobre **LIMA CITY v16.2**. Juego de mesa web multijugador con Firebase Realtime Database y autenticación anónima.
 
-## Publicación rápida en GitHub + Vercel
+## Qué cambia en v17
 
-1. Descomprime el ZIP y sube **el contenido de la carpeta** a un repositorio nuevo de GitHub (Add file → Upload files → Commit changes).
-2. En https://console.firebase.google.com crea un proyecto. En **Build → Realtime Database**, crea una base de datos y copia su URL. **Importante:** selecciona Realtime Database, no Firestore.
-3. En **Realtime Database → Rules** pega el contenido de `database.rules.json` y publica las reglas. **Estas reglas son solo para pruebas privadas**: permiten leer y modificar salas sin autenticar. No son adecuadas para un lanzamiento público.
-4. En Firebase → Configuración del proyecto → Tus apps → Web (`</>`) registra una app y copia los valores de `firebaseConfig`.
-5. En https://vercel.com crea **Add New → Project**, importa el repositorio y elige Vite (o deja que lo detecte). En **Environment Variables** añade:
-   - `VITE_FIREBASE_API_KEY` = `apiKey`
-   - `VITE_FIREBASE_AUTH_DOMAIN` = `authDomain`
-   - `VITE_FIREBASE_DATABASE_URL` = URL de Realtime Database
-   - `VITE_FIREBASE_PROJECT_ID` = `projectId`
-   - `VITE_FIREBASE_APP_ID` = `appId`
-6. Haz clic en **Deploy**. Si añadiste variables después de publicar, haz **Redeploy**. Abre el enlace de Vercel en cada celular, crea sala y comparte el código de 6 caracteres.
+- **64 cartas en total**: 32 de Suerte Limeña y 32 de Arca Comunal, con nuevos eventos limeños y sin repetir cartas hasta agotar el mazo.
+- Nuevos efectos: avanzar al siguiente transporte o servicio, pagar reparaciones por casas y hoteles, cobrar/pagar a los rivales y obtener un **pase para salir gratis de la comisaría**. El pase se guarda en el jugador y se puede usar antes de lanzar los dados.
+- **Ocho grupos de color diferentes**. Al tocar una casilla aparece su grupo, las propiedades que lo componen y cuáles posees. La marca de cada jugador conserva su **color de propietario independiente**.
+- Estilo **Lima moderna urbana**: fondo con identidad de ciudad, rótulos renovados, tablero con profundidad, casillas elevadas, dados y tarjetas mejoradas.
+- **Dos modos de tablero en un mismo juego**: `Vista 2.5D` o `Vista plana`. Cada jugador puede cambiar de vista sin afectar la sala.
+- Botón `📚 64 cartas` durante la partida para consultar el catálogo completo.
+- Se mantienen **subastas dinámicas (+10/+20/+40)**, negociaciones con tarjetas, casas, hoteles, pozo, selección de ficha, reacciones y las opciones de temas noche/clásico/neón.
+- Se conserva la interfaz horizontal adaptada a teléfono. Para usarla, gira el teléfono.
 
-## Prueba en tu computadora
+## Cómo instalar en GitHub / Vercel
 
-`npm install` → copia `.env.example` como `.env` y rellena los valores → `npm run dev`.
+1. Descomprime el ZIP.
+2. Sube **todos los archivos de la raíz** al repositorio GitHub actual, reemplazando los anteriores.
+3. Confirma los cambios (Commit changes).
+4. Espera a que el despliegue en Vercel aparezca como **Ready**.
+5. Abre el juego y crea una **sala nueva**, para que los mazos y jugadores tengan el estado actualizado.
 
-## Reglas y limitaciones de esta primera versión
+**No cambies las variables de entorno ni las reglas de Firebase**: los archivos `firebase.js`, `database.rules.json` y `env.example` se conservaron desde v16.2.
 
-- Cada jugador empieza con S/ 1,500. Pasar por salida otorga S/ 200.
-- Turnos secuenciales, dados de 2 a 12; sin tiradas extra por dobles.
-- Compra de propiedades, transporte y servicios; alquiler automático.
-- Casas (hasta 4) y hotel (5.º nivel) con costo del 50 % del precio del distrito. Sin requisito de monopolio de color.
-- Hipoteca de propiedades sin construcciones al 50 % y rescate al 55 % del precio.
-- Cartas de eventos aleatorios simplificados; comisaría con un turno perdido.
-- La partida termina cuando solo queda un jugador solvente.
-- No hay comercio entre jugadores, subastas, temporizador ni reconexión garantizada. La partida no se guarda para continuar otro día; las salas de Firebase pueden permanecer almacenadas hasta que se borren manualmente.
-- El proyecto **no incluye autenticación ni seguridad contra trampas**. Las reglas abiertas se entregan exclusivamente para pruebas con amigos de confianza. No compartas públicamente una base de datos con estas reglas; para producción se requiere autenticación, validación de movimientos y restricciones de acceso.
+## Verificación local
 
-LIMA CITY es un proyecto independiente, con nombres, diseño y tablero propios; no es un producto oficial de Monopoly.
+- `node --check engine.js`
+- `npm test` (test automatizado del motor, sin instalar dependencias)
+- `npm install` y `npm run build` para verificar la compilación completa en un equipo con acceso a npm.
 
+Las pruebas automatizadas del motor comprobaron: las 64 cartas, ocho colores de grupo, reparaciones, pase de comisaría, compatibilidad con salas antiguas y subastas con contraofertas.
 
-## Corrección v3
-Se consulta la sala con `get()` antes de iniciar la transacción de ingreso. Esto evita que la transacción se cancele inmediatamente cuando la caché local todavía no tiene la sala.
+**Limitación de verificación**: JSX se analizó y transpiló sin errores usando TypeScript, pero no se pudo completar una compilación Vite en este entorno porque npm no terminó de instalar las dependencias; tampoco se probó la sincronización con dispositivos reales.
 
-## v4: ingreso a salas
-La transacción usa el resultado de get() como base cuando Firebase inicia con caché vacía; distingue fallos de lectura, estado y escritura. Reglas actuales solo para partidas privadas de prueba, no resistentes a trampas.
+## Diseño
 
+El aspecto 2.5D se logra con CSS, no con motor 3D/WebGL. Esto ayuda a mantener el rendimiento en teléfonos y evita alterar Firebase. La vista plana está disponible para pantallas pequeñas o usuarios que prioricen legibilidad.
 
-## Versión 13 — DELUXE
-Interfaz rediseñada y títulos de propiedad coleccionables con tabla de alquileres y costo de construcción. No requiere cambios de Firebase.
+© LIMA CITY — proyecto original inspirado en juegos de compra de propiedades.

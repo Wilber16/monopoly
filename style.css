@@ -275,3 +275,164 @@ header{position:relative;z-index:2;background:#0b1a2de8;border-bottom:1px solid 
 .theme-classic .sidebar .log p,.theme-classic .sidebar .ownedItem{color:#263e54!important}
 @media(max-width:600px){.tradeDialog{padding:14px!important}.tradePropertyList{max-height:145px}.tradePlayer{min-width:110px}.bidStep{min-height:66px}.bidStep b{font-size:14px}.bidStep small{font-size:9px}}
 @media (orientation:landscape) and (max-height:430px) and (pointer:coarse){.auctionDialog,.tradeDialog{padding:12px 16px!important;gap:6px!important}.auctionAmount{padding:5px}.auctionAmount strong{font-size:26px!important}.bidStep{min-height:47px;padding:6px}.tradePlayers{gap:5px}.tradePlayer{min-height:42px}.tradePropertyList{max-height:76px}.tradeSummary{padding:7px}.tradeDialog h2,.auctionDialog h2{font-size:20px}.tradeDialog .cardTop,.auctionDialog .cardTop{padding:4px 12px}}
+
+/* v16.2 — identidad cromática individual por jugador */
+.playerByColor{position:relative;border-left:5px solid var(--player-color)!important;box-shadow:inset 5px 0 13px -12px var(--player-color);gap:9px}
+.playerByColor.active{outline:2px solid #ffd166;outline-offset:1px}
+.playerSwatch{flex:0 0 13px;width:13px;height:13px;border-radius:50%;background:var(--player-color);box-shadow:0 0 0 2px #fff9,0 0 12px var(--player-color);margin-right:2px}
+.playerColorHelp{font-size:11px!important;line-height:1.4;margin:-6px 0 12px;color:#bbcadc!important}
+.ownerByPlayer{background:var(--player-color)!important;display:flex;align-items:center;justify-content:center;gap:1px;border-top:1px solid #1b344d66;min-height:13%;color:#081829!important;font-weight:1000;text-shadow:0 1px #fff8;z-index:2}
+.ownerByPlayer .ownerSymbol{font-size:10px;line-height:1}
+.ownerByPlayer .houseMarkers,.ownerByPlayer .hotelMarker{font-size:clamp(8px,1vw,12px);line-height:1}
+.theme-classic .playerColorHelp{color:#415568!important}
+.theme-classic .playerByColor{border-left-color:var(--player-color)!important}
+.theme-classic .ownerByPlayer{background:var(--player-color)!important;color:#081829!important}
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse){.playerSwatch{width:10px;height:10px;flex-basis:10px}.playerColorHelp{font-size:10px!important;margin:0 0 5px}.ownerByPlayer .ownerSymbol{font-size:8px}}
+
+.deedOwner{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:10px 13px;border:2px solid var(--player-color);border-radius:11px;background:color-mix(in srgb,var(--player-color) 12%,white);color:#15354a;font-size:12px;font-weight:800}
+.deedOwnerDot{display:inline-block;flex:0 0 18px;width:18px;height:18px;background:var(--player-color);border-radius:50%;box-shadow:0 0 0 2px white}
+.deedUnowned{color:#306b54;font-weight:800;font-size:12px;padding:8px}
+
+/* ==========================================================
+   LIMA CITY v17 · LIMA MODERNA URBANA / 2.5D
+   Sombreados y perspectiva CSS, sin WebGL: mantiene compatibilidad
+   con móviles y controles multijugador. Perspectiva opcional.
+   ========================================================== */
+:root { --lima17-ink: #0c263b; --lima17-cream: #f4f1e8; --lima17-water: #2dbbb3; --lima17-sun: #ffb862; --lima17-coral: #fe7960; }
+body { background: radial-gradient(ellipse at 45% -10%,#21566c 0%,transparent 63%),linear-gradient(145deg,#09172a 4%,#0b2533 53%,#101629 100%); }
+.app { background: radial-gradient(ellipse at 4% 12%,#26aba616,transparent 31%),radial-gradient(ellipse at 90% 20%,#ff975112,transparent 43%); }
+header { border-bottom:2px solid #2bbeb487; background:linear-gradient(95deg,#0a1c30 2%,#124051 65%,#112235 100%); }
+.logo b { background:linear-gradient(95deg,#ffd789 0%,#ff9869 70%,#65e5cd); color:transparent!important; background-clip:text; -webkit-background-clip:text; text-shadow:none!important; font-weight:1000; letter-spacing:2.7px; }
+.logo>span { background:linear-gradient(140deg,#204963,#e5835f)!important; box-shadow:inset 0 2px 0 #ffffff55,0 5px 18px #0004; }
+.game { position:relative; }
+.gameTop { padding:12px 17px 15px!important; background:linear-gradient(110deg,#163b53ec,#17283dec)!important; border:1px solid #39b6af47!important; border-radius:18px; box-shadow:0 9px 30px #05142555; }
+.gameTop h2 { color:#ffe4b7; text-shadow:0 1px 4px #0d1c37; }
+.gameTop .eyebrow { color:#6df2d7; }
+.gameTopActions { flex-wrap:wrap; }
+.gameTopActions .viewToggle { background:linear-gradient(150deg,#2bbcb2,#117f95); color:white; border:1px solid #75ebda88; border-radius:11px; padding:9px 12px; font-size:12px; font-weight:850; box-shadow:0 3px 0 #075366; }
+.gameTopActions .viewToggle:hover { filter:brightness(1.12); }
+.gameTopActions .viewToggle:active { transform:translateY(2px); box-shadow:0 1px 0 #075366; }
+/* Cubierta física, canto y luz ambiente */
+.board { isolation:isolate; border:9px solid #355774!important; border-radius:18px!important; background:#cbd9d0!important; box-shadow:0 3px 0 #d2a67b,0 10px 0 #815f4e,0 24px 45px #020b1c99,0 0 0 2px #f5c781aa,inset 0 3px 10px #152f4665!important; transform-origin:center center; }
+.board-depth .board { animation:boardDepthEntrance .7s cubic-bezier(.2,.8,.2,1) both; }
+.board-flat .board { animation:boardFlatEntrance .5s ease both; }
+@keyframes boardDepthEntrance { from{opacity:0;transform:perspective(1500px) rotateX(9deg) translateY(22px) scale(.95)} to{opacity:1;transform:perspective(1500px) rotateX(3deg) translateY(0) scale(.98)} }
+@keyframes boardFlatEntrance { from{opacity:0;transform:translateY(12px) scale(.97)} to{opacity:1;transform:scale(1)} }
+.tile { box-shadow:inset 0 2px 0 #fff8,inset 0 -3px 0 #0e2d3222; background:linear-gradient(155deg,#fffdf7,#e6f0ed)!important; border-color:#84a2ac!important; transition:transform .18s,filter .18s,box-shadow .18s; }
+.tile .stripe { min-height:5px!important; height:16%!important; border-bottom:2px solid #162c305c; box-shadow:0 3px 0 #ffffffbb,0 4px 5px #0002; }
+.tile:hover { z-index:5!important; transform:translateY(-3px) scale(1.04)!important; box-shadow:0 6px 14px #102d3c70,inset 0 2px 0 #fff8; }
+.tile.selected { z-index:6!important; outline:3px solid #ffbb61!important; box-shadow:0 0 0 2px #f39249,0 0 13px #ffb86688; }
+.tileName { color:#102a3d!important; font-weight:900; text-shadow:0 1px 0 #fff9; }
+.tileCategoryIcon { font-size:clamp(10px,1.75vw,22px); line-height:1; margin-top:1px; filter:drop-shadow(0 2px 1px #0003); }
+.corner { background:linear-gradient(155deg,#d9f7ed,#b8dbd3)!important; }
+.ownerByPlayer { border-radius:3px 3px 0 0; box-shadow:0 -2px 2px #0001; }
+.animatedToken { transition:transform .35s ease; filter:drop-shadow(0 2px 3px #071323ab); }
+/* Centro: fachada urbana abstracta dibujada con CSS */
+.boardCenter { position:relative; isolation:isolate; overflow:hidden; background:radial-gradient(ellipse at 47% 4%,#f9f8ed 0%,#d9eee8 51%,#a9d7d2 100%)!important; box-shadow:inset 0 0 45px #4cb5b637!important; }
+.boardCenter> :not(.urbanSkyline):not(.urbanHalo) { position:relative; z-index:2; }
+.urbanHalo { position:absolute; width:83%; aspect-ratio:1; border:2px solid #39a9ab22; border-radius:50%; top:3%; left:8%; pointer-events:none; }
+.urbanHalo:after { content:''; position:absolute; inset:13%; border:2px solid #3ca9a516; border-radius:50%; }
+.urbanSkyline { position:absolute; z-index:0; bottom:0; left:0; right:0; height:31%; display:flex; align-items:end; gap:1%; padding:0 3%; opacity:.23; pointer-events:none; background:linear-gradient(0deg,#0b7180 1%,transparent 80%); }
+.urbanSkyline i { position:relative; display:block; width:12%; background:linear-gradient(180deg,#307f8c,#14556b); border-radius:3px 3px 0 0; box-shadow:inset 4px 0 #f3e0c24a,4px 0 #16617422; }
+.urbanSkyline i:after { content:''; position:absolute; inset:13% 22% 8%; opacity:.65; background:repeating-linear-gradient(180deg,#f7ecd8 0 5px,transparent 5px 13px); }
+.urbanSkyline i:nth-child(1){height:45%}.urbanSkyline i:nth-child(2){height:75%}.urbanSkyline i:nth-child(3){height:53%}.urbanSkyline i:nth-child(4){height:96%}.urbanSkyline i:nth-child(5){height:69%}.urbanSkyline i:nth-child(6){height:84%}.urbanSkyline i:nth-child(7){height:52%}.urbanSkyline i:nth-child(8){height:63%}
+.boardCenterTag { background:linear-gradient(95deg,#13576a,#1d8b89)!important; color:#fff2c4!important; border-radius:100px; border:1px solid #63c9b6; box-shadow:0 4px 16px #154d5b34; font-weight:950; letter-spacing:2px; }
+.boardCenter h1 { font-family:Impact,'Arial Black',ui-sans-serif,sans-serif; color:#123c58!important; letter-spacing:.055em; line-height:.87; margin:4px 0 10px; filter:drop-shadow(3px 4px 0 #3ca4a54d); }
+.boardCenter h1 strong { background:linear-gradient(105deg,#ffb96a 0%,#f56d62 62%,#f6a760 95%); color:transparent!important; background-clip:text; -webkit-background-clip:text; filter:drop-shadow(0 4px 0 #b45b5145); }
+.boardCenter>span { letter-spacing:2.2px; color:#28687b; }
+.boardCenter .cityscape { font-size:clamp(21px,3vw,38px)!important; margin-top:10px; line-height:1.15; }
+.centerDecor { font-size:clamp(7px,.8vw,12px)!important; letter-spacing:1.5px; color:#27747a; font-weight:900; }
+.dice b { background:linear-gradient(160deg,#ffffff,#e8f0f5); border:1px solid #becbd7; box-shadow:0 7px 0 #82aab0,0 11px 15px #1839473b; transform:rotateX(9deg) rotateZ(-2deg); }
+.dice b+ b { transform:rotateX(9deg) rotateZ(3deg); }
+.potDisplay { border:2px solid #dca45d!important; box-shadow:0 6px 0 #c38e52,0 12px 23px #785d2e37!important; }
+.boardCenterStamp { font-weight:900; letter-spacing:1.3px; color:#3d7a79; }
+/* Carta de grupo de color */
+.deedGroupInfo { background:#eef7fa; border:1px solid #aecad5; border-radius:14px; padding:12px 13px; width:100%; margin:11px 0; color:#183b54; }
+.deedGroupHeader { display:flex; align-items:center; gap:11px; }
+.deedGroupDot { display:block; width:27px; height:27px; border:2px solid #fff; box-shadow:0 1px 3px #143c4b33; border-radius:8px; flex-shrink:0; }
+.deedGroupHeader>div { display:flex; flex-direction:column; gap:1px; min-width:0; text-align:left; }
+.deedGroupHeader b { font-size:13px; letter-spacing:1px; }
+.deedGroupHeader small { font-size:10px; color:#527082; }
+.deedGroupOwned { margin-left:auto; white-space:nowrap; background:white; padding:6px 8px; border-radius:8px; font-size:11px; font-weight:850; }
+.deedGroupList { display:flex; flex-wrap:wrap; gap:6px; margin-top:11px; }
+.deedGroupList>span { font-size:11px; color:#34566f; background:#fff; padding:6px 8px; border:1px solid #d4e4eb; border-radius:8px; font-weight:750; }
+.deedGroupList>span.currentGroupMember { background:#bfece4; color:#086a62; border-color:#67bbb0; }
+.deedGroupInfo.specialGroup { display:flex; flex-direction:column; gap:3px; }
+.deedGroupInfo.specialGroup small { font-size:11px; color:#527082; }
+/* Pase de comisaría */
+.jailPassAction { width:100%; background:linear-gradient(105deg,#1ebfa9,#1496bb); color:#073145; padding:11px; font-weight:900; border-radius:10px; margin:0 0 7px; }
+/* Catálogo de cartas */
+.deckLibrary { width:min(840px,95vw)!important; max-height:89dvh; overflow:auto; background:#f2f9f9!important; border:3px solid #3ba3a7; color:#163a4c!important; text-align:left!important; align-items:stretch!important; padding:20px!important; gap:10px!important; }
+.deckLibrary h2 { margin:0;color:#163b50;font-size:22px; }
+.deckLibrary p { margin:0;color:#5b7081;font-size:12px; }
+.deckLibraryTabs { display:flex; gap:8px; }
+.deckLibraryTabs button { border-radius:9px;padding:10px 14px; background:#cfe8e8;color:#1e5260;font-weight:900; }
+.deckLibraryTabs button.active { background:#196b78; color:white; }
+.deckGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; overflow:auto; }
+.deckPreview { background:white; padding:10px; display:flex; align-items:center; gap:10px; border:1px solid #b5d4d7; border-left:5px solid #43b898; border-radius:11px; }
+.deckGrid.chance .deckPreview { border-left-color:#ffad51; }
+.deckPreview .deckEmoji { font-size:27px; flex-shrink:0; }
+.deckPreview div { display:flex;flex-direction:column; gap:3px; }
+.deckPreview b { font-size:12px; line-height:1.2; }
+.deckPreview small { color:#456374; font-size:11px; line-height:1.2; }
+.deckLibrary .deckClose { width:100%;border-radius:10px;padding:12px;background:#214d62;color:#fff;font-weight:900; }
+.deckOpen { padding:9px 11px; border:1px solid #8bc9be88; background:#204e5e; border-radius:10px; color:#d9ffef; font-weight:850; font-size:12px; }
+/* Night/classic/neon consistency and text readability */
+.theme-classic .game { background:linear-gradient(135deg,#dbe9e4,#d7e7e8 45%,#d9e4ea)!important; }
+.theme-classic .gameTop { background:linear-gradient(105deg,#f9fdfb,#ecf6f4)!important; border:1px solid #8eb8b3!important; }
+.theme-classic .gameTop h2,.theme-classic .sidebar h3 { color:#193b50!important; text-shadow:none!important; }
+.theme-classic .gameTop .eyebrow { color:#126f79!important; }
+.theme-classic .sidebar .panel { background:#f7fcfc!important; border-color:#97bcbc!important; }
+.theme-classic .sidebar .panel button.secondary { color:#fff!important; background:#294861!important; }
+.theme-classic .sidebar .player { background:#dce9ef!important; color:#1b3950!important; }
+.theme-classic .sidebar .player b,.theme-classic .sidebar .player small,.theme-classic .sidebar .player span { color:#1b3950!important; }
+.theme-classic .sidebar .actions .primary { color:#173047!important; }
+.theme-classic .gameTopActions .secondary { background:#294861!important; color:white!important; }
+.theme-classic .gameTopActions .exitGameBtn { background:#df6e62!important; color:#fff!important; }
+.theme-classic .gameTopActions .viewToggle { background:#137c85!important; color:white!important; }
+.theme-classic .board { border-color:#6e9ca2!important; }
+.theme-classic .gameTabs { background:#e3eeed!important; }
+.theme-classic .gameTabs button { background:#bfd4d5!important; color:#214655!important; }
+.theme-classic .gameTabs button.active { background:#158b92!important; color:white!important; }
+.theme-classic .themeSelect { color:white!important; }
+.theme-neon .board { border-color:#5a48a0!important; box-shadow:0 9px 0 #8933b3,0 24px 55px #030414aa,0 0 0 2px #64e6ec!important; }
+.theme-neon .boardCenter { background:radial-gradient(ellipse,#f4f5f3,#cde3e8 80%)!important; }
+/* Short landscape: preserve controls and main board legibility */
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse){
+ .gameTop { padding:4px 8px!important; border-radius:10px; }
+ .gameTopActions .viewToggle,.gameTopActions .deckOpen { font-size:9px; padding:6px 6px; }
+ .board { border-width:4px!important; border-radius:11px!important; }
+ .board-depth .board { animation:boardDepthMobile .5s ease both; }
+ @keyframes boardDepthMobile{from{opacity:0;transform:perspective(1200px) rotateX(5deg) scale(.98)}to{opacity:1;transform:perspective(1200px) rotateX(1.2deg) scale(.997)}}
+ .boardCenter .cityscape{font-size:14px!important;margin-top:2px}
+ .boardCenter h1 { font-size:clamp(20px,6.1vh,50px);margin:1px 0 3px; }
+ .boardCenterTag { font-size:7px!important; letter-spacing:.6px!important; }
+ .urbanSkyline { height:26%; }
+ .tileCategoryIcon { font-size:9px; margin-top:0; }
+ .tileName { margin-top:0; }
+ .boardCenterStamp { font-size:6px!important; }
+ .deckLibrary { padding:12px!important; }
+ .deckGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .deedGroupInfo { padding:8px;margin:5px 0; }
+ .deedGroupList>span { padding:4px; }
+}
+@media (max-width:600px) and (orientation:portrait){
+ .gameTopActions .viewToggle,.gameTopActions .deckOpen { font-size:10px;padding:8px; }
+ .board-depth .board { animation:boardDepthMobilePortrait .5s ease both; }
+ @keyframes boardDepthMobilePortrait { from{opacity:0;transform:scale(.975)} to{opacity:1;transform:scale(1)} }
+ .tileCategoryIcon { display:none; }
+ .deckGrid {grid-template-columns:1fr}
+ .deckLibrary {max-height:85dvh}
+}
+@media (prefers-reduced-motion:reduce){
+ .board-depth .board,.board-flat .board {animation:none!important;transform:none!important}
+ .urbanSkyline {opacity:.14}
+}
+/* Tarjetas de eventos de la edición moderna */
+.limeEvent.communityCard{background:linear-gradient(157deg,#f0fff9 0%,#dcf8ee 56%,#b1e9dd 100%)!important;border:4px solid #31ad9c!important;box-shadow:0 9px 0 #15776f,0 24px 55px #020d1d99!important}
+.limeEvent.chanceCard{background:linear-gradient(157deg,#fffdf2 0%,#fff0cc 53%,#ffd3a4 100%)!important;border:4px solid #f3a449!important;box-shadow:0 9px 0 #b2702e,0 24px 55px #020d1d99!important}
+.limeEvent .cardTop{background:#153e57;color:#fdf1cf;padding:8px 14px;border-radius:100px;letter-spacing:1.2px}
+.limeEvent .cardEmoji{filter:drop-shadow(0 5px 5px #0004)}
+.limeEvent h2{color:#17364a;font-weight:950}
+.limeEvent p{color:#3d5769}
+.limeEvent .primary{color:#1c2c3a}
