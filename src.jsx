@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from 'react';import{createRoot}from'react-dom/client';import{ref,set,get,onValue,runTransaction}from'firebase/database';import{db,configured,auth,login,onAuthStateChanged}from'./firebase';import{board,newGame,apply,money,tokens,rentTable,rentAt,buildCost,groupFor,groupDetails,decks}from'./engine';import './style.css';
+import React,{useState,useEffect,useRef} from 'react';import{createRoot}from'react-dom/client';import{ref,set,get,onValue,runTransaction}from'firebase/database';import{db,configured,auth,login,onAuthStateChanged}from'./firebase';import{board,newGame,apply,money,tokens,rentTable,rentAt,buildCost,groupFor,groupDetails,decks}from'./engine';import {fichaPng} from './fichas-embebidas.js';import './style.css';
 // Colores estables por asiento de jugador (independientes del tema y del color del distrito).
 const playerPalette=['#00C5B3','#FF7A59','#A78BFA','#FFD166','#52A8FF','#F472B6','#A3E635','#FB923C','#22D3EE','#E879F9','#FBBF24','#94A3B8'];
 const playerColor=(players,id)=>{const i=players.findIndex(p=>p.id===id);return i<0?'#64748B':playerPalette[i%playerPalette.length]};
@@ -7,7 +7,7 @@ const districtIllustrations={'Ancón':'🌊','Santa Rosa':'🐚','Puente Piedra'
 // Siluetas/íconos originales y pistas culturales por distrito. Nombres de símbolos son orientativos.
 const tokenNames={'🚕':'Taxi amarillo','🚌':'Corredor azul','🛺':'Mototaxi','🦙':'Llama andina','🪆':'Ekeko de la suerte','🚐':'Combi limeña','🚍':'Metropolitano','🚈':'Tren eléctrico','🥤':'Emolientero','🐂':'Torito peruano','🧶':'Chullo andino','🛵':'Delivery limeño','🍢':'Carrito de anticuchos'};
 const tokenImages={'🚕':'taxi','🚌':'corredor','🛺':'mototaxi','🦙':'llama','🪆':'ekeko','🚐':'combi','🚍':'metropolitano','🚈':'tren','🥤':'emolientero','🐂':'torito','🛵':'delivery','🍢':'anticuchos'};
-function TokenFigure({token}){const image=tokenImages[token];return image?<img className="tokenFigure" src={'/fichas/'+image+'.png'} alt={tokenNames[token]||'Ficha peruana'} draggable={false}/>:<span>{token||'🎲'}</span>}
+function TokenFigure({token}){const image=tokenImages[token];return image?<img className="tokenFigure" src={fichaPng[image]||'/fichas/'+image+'.png'} alt={tokenNames[token]||'Ficha peruana'} draggable={false}/>:<span>{token||'🎲'}</span>}
 const districtStories={
  'Ancón':['🌊','Balneario del norte · mar y playa'],
  'Santa Rosa':['🐚','Costa norte de Lima · playa'],

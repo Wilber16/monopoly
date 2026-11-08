@@ -1,0 +1,12 @@
+LIMA CITY v17.3.1 — CORRECCIÓN DE FICHAS INVISIBLES
+
+Causa probable: las URLs /fichas/*.png no existen en el despliegue; el navegador muestra el texto alternativo.
+Esta versión incorpora las 12 fichas PNG en el módulo fichas-embebidas.js, así que no depende de que Vercel publique public/fichas.
+
+INSTALACIÓN:
+1) Descomprime el ZIP.
+2) En GitHub, sube todos los archivos, MUY IMPORTANTE el archivo nuevo fichas-embebidas.js en la raíz, junto a src.jsx.
+3) Conserva la estructura de carpetas; también puedes subir public/fichas, aunque esta corrección funciona sin ella.
+4) Commit changes. Espera a que Vercel muestre Ready y recarga el navegador.
+
+Sin cambios en Firebase ni reglas, mazos, subastas o motor.
