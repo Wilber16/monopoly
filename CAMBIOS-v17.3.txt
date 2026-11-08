@@ -1,0 +1,9 @@
+LIMA CITY v17.3 — FICHAS COLECCIONABLES
+
+12 fichas ilustradas en PNG con transparencia, en public/fichas.
+La pantalla de selección, sala de espera, panel de jugadores y casillas usan las ilustraciones en lugar de emojis.
+Las fichas siguen identificándose por su emoji interno en Firebase para conservar compatibilidad con partidas anteriores.
+Se incorpora Carrito de Anticuchos al selector, sustituyendo Chullo; las fichas antiguas con Chullo siguen apareciendo como emoji.
+No se modificaron las reglas de Firebase ni las mecánicas de juego.
+
+IMPORTANTE: subir la carpeta public/fichas completa al repositorio.

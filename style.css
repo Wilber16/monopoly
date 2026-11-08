@@ -700,3 +700,16 @@ header { border-bottom:2px solid #2bbeb487; background:linear-gradient(95deg,#0a
  .board .boardCenter .centerBrand .chichaWordmark{font-size:clamp(27px,8.8vw,58px)!important;line-height:.8}
 }
 @media (prefers-reduced-motion:reduce){.tokenHopping{animation:none!important}}
+
+/* V17.3: fichas coleccionables PNG */
+.tokenFigure{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 3px 2px #001c2b8a)}
+.tokenGallery .tokenArt{display:flex;align-items:center;justify-content:center;width:100%;height:68px;min-height:68px;filter:none}
+.tokenGallery .tokenArt .tokenFigure{max-width:95%;max-height:100%;filter:drop-shadow(0 5px 3px #0006)}
+.tokenGallery .tokenChoice{min-height:111px!important}
+.tokenGem .tokenFigure{width:100%;height:100%;object-fit:contain}
+.board .tile .animatedToken{width:clamp(27px,3.2vw,47px);height:clamp(27px,3.2vw,47px);min-width:0!important;max-width:49%!important;padding:1px!important}
+.board .tile .animatedToken .tokenFigure{width:100%;height:100%}
+.player .avatar.tokenGem{width:56px;height:56px;padding:2px}
+.playerLobby .tokenGem{width:60px;height:60px;padding:2px}
+.auctionPlayers .tokenFigure{width:28px;height:28px;display:inline-block;vertical-align:middle}
+@media(max-width:700px){.tokenGallery{grid-template-columns:repeat(3,minmax(0,1fr))}.tokenGallery .tokenArt{height:60px;min-height:60px}.tokenGallery .tokenChoice{min-height:102px!important}}

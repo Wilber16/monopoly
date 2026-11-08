@@ -1,7 +1,7 @@
 const names=['SALIDA','Ancón','Comunidad','Santa Rosa','Impuesto municipal','Metropolitano','Puente Piedra','Suerte limeña','Carabayllo','Comas','COMISARÍA','Independencia','Empresa de luz','Los Olivos','San Martín de Porres','Línea 1','Rímac','Comunidad','Breña','Pueblo Libre','LA TINKA','Jesús María','Suerte limeña','Lince','Magdalena','Corredor Azul','San Miguel','San Borja','Empresa de agua','Surquillo','A COMISARÍA','Barranco','Chorrillos','Comunidad','La Molina','Taxi amarillo','Surco','Impuesto predial','Miraflores','San Isidro'];
 const colors=['#7b86a1','#8d6be7','#8d6be7','#8d6be7','#7b86a1','#23c7bb','#8d6be7','#ffb84c','#8d6be7','#8d6be7','#7b86a1','#48b5ff','#7b86a1','#48b5ff','#48b5ff','#23c7bb','#ff8b5d','#ffb84c','#ff8b5d','#ff8b5d','#7b86a1','#f2cf57','#ffb84c','#f2cf57','#f2cf57','#23c7bb','#6fe19d','#6fe19d','#7b86a1','#6fe19d','#7b86a1','#f26d9b','#f26d9b','#ffb84c','#f26d9b','#23c7bb','#f16b55','#7b86a1','#f16b55','#e9ba58'];
 export const board=names.map((name,i)=>({id:i,name,color:colors[i],kind:[0,10,20,30].includes(i)?'corner':[2,17,33].includes(i)?'community':[7,22].includes(i)?'chance':[4,37].includes(i)?'tax':[5,15,25,35].includes(i)?'transport':[12,28].includes(i)?'utility':'property',price:[0,60,0,60,0,200,100,0,100,120,0,140,150,140,160,200,180,0,180,200,0,220,0,220,240,200,260,260,150,280,0,300,300,0,320,200,350,0,400,450][i]}));
-export const tokens=['🚕','🚌','🛺','🦙','🪆','🚐','🚍','🚈','🥤','🐂','🧶','🛵'];
+export const tokens=['🚕','🚌','🛺','🦙','🪆','🚐','🚍','🚈','🥤','🐂','🛵','🍢'];
 // Fichas antiguas siguen siendo válidas en salas ya existentes.
 const previousTokens=['🚕','🛵','🚌','🚲','🚗','🚁','🚀','🐆','🦙','🛺','⚽','🛹'];
 export const money=n=>'S/ '+Math.round(n).toLocaleString('es-PE');
