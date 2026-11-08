@@ -1,0 +1,12 @@
+LIMA CITY v17.1 · TABLERO CINEMÁTICO
+
+- Ilustración vectorial original del malecón, Costa Verde, edificios, palmeras y buses de Lima en versiones nocturna y diurna.
+- Tablero con borde físico, relieve, sombras profundas y casillas con textura urbana incluso en Vista plana.
+- Mejores mini-iconos por distrito en pantallas grandes (ocultos en móviles pequeños para mantener legibilidad).
+- Centro del tablero renovado con logo 3D visual, panel de dados y pozo sobre la ilustración.
+- Efectos distintos de iluminación para Lima nocturna, clásica y neón.
+- Vista 2.5D con inclinación sutil en escritorio; menos inclinación en móvil horizontal.
+- Se preservaron los 64 eventos, subastas, negociaciones, construcciones, colores de jugadores, Firebase y reglas existentes.
+- Para instalar: reemplazar archivos de GitHub con contenido de ZIP, incluidos los recursos de public/.
+
+ATENCIÓN: Si no se sube la carpeta public, el juego funcionará pero no aparecerán las ilustraciones del centro.

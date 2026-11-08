@@ -38,3 +38,7 @@ Las pruebas automatizadas del motor comprobaron: las 64 cartas, ocho colores de 
 El aspecto 2.5D se logra con CSS, no con motor 3D/WebGL. Esto ayuda a mantener el rendimiento en teléfonos y evita alterar Firebase. La vista plana está disponible para pantallas pequeñas o usuarios que prioricen legibilidad.
 
 © LIMA CITY — proyecto original inspirado en juegos de compra de propiedades.
+
+
+## v17.1 · Tablero Cinemático
+Se agregaron imágenes vectoriales SVG originales en la carpeta `public/`. **Sube también esta carpeta** a GitHub. Mantén sin cambios las variables de entorno Firebase de Vercel. La vista plana y 2.5D utilizan el mural renovado.
