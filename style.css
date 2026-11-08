@@ -602,3 +602,101 @@ header { border-bottom:2px solid #2bbeb487; background:linear-gradient(95deg,#0a
  .board .boardCenterStamp{font-size:6px;letter-spacing:.3px}
 }
 @media (prefers-reduced-motion:reduce){.board-depth .board,.board-flat .board{animation:none!important;transform:none!important}}
+
+
+/* ===============================================================
+ LIMA CITY 17.2 | CHICHA URBANA ORIGINAL
+ Original letter styling inspired by Peru's street-poster aesthetics;
+ do NOT use the reference logo or any proprietary font file.
+ =============================================================== */
+.app .logo b,.app .centerBrand .chichaWordmark,.app .hero h1 em{
+ font-family:Impact,'Arial Black',system-ui,sans-serif;
+ font-weight:1000;
+}
+.app .logo b{
+ display:inline-block;letter-spacing:.095em;
+ color:#ffdd53;
+ -webkit-text-stroke:.65px #48154a;
+ text-shadow:2px 2px 0 #e94e36,3px 3px 0 #7b2776,5px 5px 0 #092033,0 0 18px #efbb5b54;
+}
+.board .boardCenter .centerBrand .chichaWordmark{
+ display:flex!important;flex-direction:column;align-items:center;
+ margin:6px 0 9px!important;transform:rotate(-3deg) skew(-2deg);
+ font-size:clamp(53px,7vw,125px)!important;line-height:.83;
+ -webkit-text-stroke:2px #2b103e;
+ filter:drop-shadow(0 10px 7px #001624a6)!important;
+}
+.board .boardCenter .centerBrand .chichaWordmark span{
+ display:block;
+ color:#ffde34!important;
+ -webkit-text-stroke:2px #43104b;
+ text-shadow:1px 3px #f54031,3px 6px #fd7c22,6px 9px #c21b73,9px 13px #2a1259,12px 16px 2px #0009;
+}
+.board .boardCenter .centerBrand .chichaWordmark strong{
+ display:block!important;color:#8fff35!important;
+ background:linear-gradient(180deg,#faff36 4%,#ffd21b 34%,#ff7d12 56%,#fd2c66 86%)!important;
+ background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;
+ -webkit-text-stroke:2px #481448!important;
+ text-shadow:3px 4px 0 #35135a,5px 7px 0 #12bcb8;
+ filter:drop-shadow(3px 6px 0 #00183aa4)!important;
+}
+.board .boardCenter .boardCenterTag{
+ background:linear-gradient(115deg,#f9f72d,#f99f18,#ff557a)!important;
+ color:#321840!important; border:2px solid #fff37b!important;
+ box-shadow:0 4px 0 #8f1863,0 9px 15px #0012269e!important;
+ letter-spacing:1.5px;transform:rotate(-2deg);
+}
+.app .hero h1 em{color:#ffe02c;text-shadow:2px 3px 0 #ff4b60,5px 6px 0 #853e97;letter-spacing:.02em}
+.board .tile{transition:transform .13s ease,box-shadow .13s ease!important;}
+.board .tile .stripe{border-bottom:2px solid #ffffff96;box-shadow:0 3px 0 #12374650,inset 0 3px 0 #ffffff80!important}
+.board .tile:hover{transform:translateY(-2px)!important;box-shadow:0 4px 14px #0005,inset 0 2px #fff!important}
+.board .tile.tile-20{background:linear-gradient(145deg,#fffab9,#ffd86b 60%,#f4a634)!important}
+.board .tile.tile-20 .tileName{color:#88431b!important;font-weight:1000;text-shadow:0 1px #fff6}
+.board .tile.tile-20 .stripe{background:linear-gradient(90deg,#fff42b,#fb4fa0,#40e9a8)!important}
+.board .tile.tile-20::after{content:'🎟️';position:absolute;top:35%;left:15%;font-size:clamp(10px,1.35vw,22px);opacity:.45;pointer-events:none}
+.board .tile.tile-20,.board .tile.tile-0{box-shadow:inset 0 3px #ffffffaf,inset 0 -4px #9f693a5d}
+.board .boardCenter{background-color:#0d2541!important}
+.board .boardCenter .centerTagline{background:#351c52e3!important;border:1px solid #ffdf6c!important;color:#ffe78a!important}
+.board .boardCenter .centerDecor{background:#1f304cbb;border-radius:7px;padding:4px 8px;color:#f8e6b7!important}
+.board .potDisplay{background:linear-gradient(130deg,#4d1d60ed,#85245fe3,#143e51ef)!important;border-color:#ffe164!important;box-shadow:0 4px 0 #a85019,0 12px 26px #000a!important}
+.board .potDisplay strong{color:#ffdc37!important;letter-spacing:1px}
+.board .potDisplay b{color:#c5ff6b!important;text-shadow:0 2px 0 #123b35,0 0 10px #baff4160!important}
+.tokenGallery{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;align-items:stretch}
+.tokenGallery .tokenChoice{display:flex!important;flex-direction:column;justify-content:center;align-items:center;gap:3px;min-width:0;min-height:81px;height:auto;padding:5px 3px;border-radius:13px;line-height:1.05}
+.tokenGallery .tokenArt{font-size:clamp(23px,3.5vw,38px);filter:drop-shadow(0 4px 2px #0004)}
+.tokenGallery .tokenChoice small{font-size:10px;letter-spacing:0;color:#e4e9fa;text-align:center;font-weight:750;line-height:1.05}
+.tokenGallery .tokenChoice.chosen small{color:#252f38}
+.tokenGem{display:inline-grid!important;place-items:center!important;flex-shrink:0;font-size:clamp(19px,2vw,32px);line-height:1.1!important;background:radial-gradient(circle at 32% 24%,#ffffffb8,#c4e4eb73 42%,#1a5976 90%);border:2px solid #f9e0a7;box-shadow:0 4px 0 #07253b,0 7px 6px #001a2855,inset 0 2px #fff9;aspect-ratio:1;border-radius:50%;padding:3px;filter:drop-shadow(0 2px 1px #0015227a)}
+.board .tile .tokens{display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:2px;position:absolute;bottom:16%;left:1%;right:1%;top:auto!important;z-index:9;pointer-events:none}
+.board .tile .animatedToken{font-size:clamp(12px,1.45vw,24px)!important;min-width:22px;max-width:53%;padding:1px!important;box-sizing:border-box;text-align:center;position:relative;filter:drop-shadow(0 3px 2px #0005)}
+.tokenHopping{animation:tokenHop .165s cubic-bezier(.28,0,.45,1) infinite alternate!important;z-index:12}
+@keyframes tokenHop{0%{transform:translateY(2px) scale(.96)}100%{transform:translateY(-10px) scale(1.14)}}
+.player .avatar.tokenGem{width:49px;height:49px;font-size:27px!important;padding:4px;background:radial-gradient(circle at 35% 21%,#ffffffe6,#a2dfe38c 65%,#1b526d)}
+.playerLobby .tokenGem{width:46px;height:46px;font-size:28px}
+.deedDistrictArt{position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center;background:linear-gradient(130deg,color-mix(in srgb,var(--district-color) 30%,white),#ffffff 68%);border:2px solid color-mix(in srgb,var(--district-color) 62%,white);margin:8px 0 14px;box-shadow:0 5px 15px #0001}
+.deedDistrictGlyph{font-size:48px;filter:drop-shadow(0 5px 2px #0002)}
+.deedDistrictArt div{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;flex:1}
+.deedDistrictArt b{font-family:Impact,'Arial Black',sans-serif;font-size:20px;color:#173d56;letter-spacing:.9px}
+.deedDistrictArt small{font-size:12px;color:#35546a;line-height:1.3}
+.deedDistrictDecor{position:absolute;right:-9px;top:-8px;color:#2856761c;font-weight:1000;font-size:25px;transform:rotate(25deg)}
+.chichaBanner{font-family:Impact,'Arial Black',sans-serif;letter-spacing:2px!important;font-size:19px!important;color:#fff3a1;text-shadow:2px 2px #91245f,3px 4px #1d1b4f}
+/* Overlay remains dark enough for text with the new chicha look. */
+.chanceCard,.communityCard{box-shadow:0 10px 0 #2f2244,0 24px 70px #000a!important}
+/* Portable landscape: keep the new oversized tokens inside square cells. */
+@media (orientation:landscape) and (max-height:650px) and (pointer:coarse){
+ .board .tile .animatedToken{font-size:clamp(11px,2.8vh,17px)!important;min-width:13px;max-width:49%;border-width:1px}
+ .board .tile .tokens{bottom:13%!important;gap:0}
+ .board .boardCenter .centerBrand .chichaWordmark{font-size:clamp(25px,8vh,62px)!important;line-height:.84;margin:0 0 5px!important;-webkit-text-stroke:1px #43104b}
+ .board .boardCenter .centerBrand .chichaWordmark span,.board .boardCenter .centerBrand .chichaWordmark strong{-webkit-text-stroke:1px #43104b}
+ .board .tile.tile-20::after{display:none}
+ .tokenGallery{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .tokenGallery .tokenChoice{min-height:61px}
+ .tokenGallery .tokenArt{font-size:22px}
+ .tokenGallery .tokenChoice small{font-size:8px}
+}
+@media (max-width:650px) and (orientation:portrait){
+ .tokenGallery{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .board .tile .animatedToken{font-size:clamp(9px,2.2vw,14px)!important;min-width:13px;max-width:50%;border-width:1px}
+ .board .boardCenter .centerBrand .chichaWordmark{font-size:clamp(27px,8.8vw,58px)!important;line-height:.8}
+}
+@media (prefers-reduced-motion:reduce){.tokenHopping{animation:none!important}}

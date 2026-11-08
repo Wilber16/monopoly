@@ -30,4 +30,17 @@
       </g>
 <path d="M0 0 H1600 V1100 H0Z" fill="url(#lines)"/>
 <rect width="1600" height="1100" fill="#0d2239" opacity=".09"/>
-</svg>
+<g id="lima-landmarks" opacity=".92">
+<!-- Silhouette of Cerro San Cristobal, with a small cross at its summit. -->
+<path d="M0 710 Q85 660 145 627 Q197 579 241 540 Q305 590 345 642 Q420 655 479 708Z" fill="#4e8f86" opacity=".79"/>
+<path d="M236 537 V498 M225 507 H247" fill="none" stroke="#d7a970" stroke-width="7" stroke-linecap="round"/>
+<!-- Plaza Mayor-inspired colonial balconies and clock face (original iconography). -->
+<g transform="translate(1090 552)">
+ <rect x="0" y="0" width="205" height="203" rx="5" fill="#bd8258" opacity=".78"/>
+ <rect x="18" y="0" width="169" height="24" fill="#e2ad75"/>
+ <path d="M0 32 H205 M0 101 H205" stroke="#f9dda2" stroke-width="5" opacity=".67"/>
+ <g fill="#17374d"><rect x="28" y="46" width="40" height="47" rx="4"/><rect x="84" y="46" width="40" height="47" rx="4"/><rect x="140" y="46" width="40" height="47" rx="4"/></g>
+ <g stroke="#e9ad6a" stroke-width="4"><path d="M24 74 H184 M24 85 H184"/></g>
+ <path d="M85 0 V-45 H122 V0" fill="#cf9965"/><circle cx="103" cy="-23" r="13" fill="#f1e2b9" stroke="#975b48" stroke-width="4"/>
+</g>
+</g></svg>
