@@ -1,0 +1,1 @@
+LIMA CITY v17.3.4: Logo chicha ahora embebido directamente en src.jsx como WebP data URI para evitar error de Vercel Could not resolve ./assets/lima-city-logo-chicha.png. Sin cambios a Firebase ni al motor. Subir todos los archivos del ZIP a GitHub.
