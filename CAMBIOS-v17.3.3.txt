@@ -1,0 +1,1 @@
+LIMA CITY v17.3.3 — Logo y vista móvil reparados. Importa logo desde assets (Vite lo empaqueta), no desde una URL pública que puede faltar; tablero móvil desplazable de 720px para leer casillas y fichas, con botón para alternar vista completa/ampliada. Sin cambios al motor o Firebase. Se mantiene estilo horizontal. En celular vertical, desliza el tablero de lado a lado.
