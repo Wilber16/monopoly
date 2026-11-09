@@ -1,0 +1,7 @@
+LIMA CITY v16.2 — Colores por jugador
+
+Cada jugador tiene ahora un color único y consistente en el panel de jugadores y en la franja de las propiedades adquiridas.
+Al tocar cualquier propiedad adquirida, su título mostrará el nombre y color de su propietario.
+La paleta contempla 12 colores; la sala mantiene su límite actual de 6 jugadores (no se cambió el multijugador ni sus reglas).
+Los colores de los grupos/distritos y las mecánicas de v16.1 se conservan.
+Para actualizar: descomprimir y subir los archivos del ZIP a GitHub, reemplazando los existentes; esperar Vercel Ready y crear una partida nueva.

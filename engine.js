@@ -1,35 +1,15 @@
-const names=['SALIDA','Ancón','Comunidad','Santa Rosa','Impuesto municipal','Metropolitano','Puente Piedra','Suerte limeña','Carabayllo','Comas','COMISARÍA','Independencia','Empresa de luz','Los Olivos','San Martín de Porres','Línea 1','Rímac','Comunidad','Breña','Pueblo Libre','LA TINKA','Jesús María','Suerte limeña','Lince','Magdalena','Corredor Azul','San Miguel','San Borja','Empresa de agua','Surquillo','A COMISARÍA','Barranco','Chorrillos','Comunidad','La Molina','Taxi amarillo','Surco','Impuesto predial','Miraflores','San Isidro'];
+const names=['SALIDA','Ancón','Comunidad','Santa Rosa','Impuesto municipal','Metropolitano','Puente Piedra','Suerte limeña','Carabayllo','Comas','COMISARÍA','Independencia','Empresa de luz','Los Olivos','San Martín de Porres','Línea 1','Rímac','Comunidad','Breña','Pueblo Libre','DESCANSO','Jesús María','Suerte limeña','Lince','Magdalena','Corredor Azul','San Miguel','San Borja','Empresa de agua','Surquillo','A COMISARÍA','Barranco','Chorrillos','Comunidad','La Molina','Taxi amarillo','Surco','Impuesto predial','Miraflores','San Isidro'];
 const colors=['#7b86a1','#8d6be7','#8d6be7','#8d6be7','#7b86a1','#23c7bb','#8d6be7','#ffb84c','#8d6be7','#8d6be7','#7b86a1','#48b5ff','#7b86a1','#48b5ff','#48b5ff','#23c7bb','#ff8b5d','#ffb84c','#ff8b5d','#ff8b5d','#7b86a1','#f2cf57','#ffb84c','#f2cf57','#f2cf57','#23c7bb','#6fe19d','#6fe19d','#7b86a1','#6fe19d','#7b86a1','#f26d9b','#f26d9b','#ffb84c','#f26d9b','#23c7bb','#f16b55','#7b86a1','#f16b55','#e9ba58'];
 export const board=names.map((name,i)=>({id:i,name,color:colors[i],kind:[0,10,20,30].includes(i)?'corner':[2,17,33].includes(i)?'community':[7,22].includes(i)?'chance':[4,37].includes(i)?'tax':[5,15,25,35].includes(i)?'transport':[12,28].includes(i)?'utility':'property',price:[0,60,0,60,0,200,100,0,100,120,0,140,150,140,160,200,180,0,180,200,0,220,0,220,240,200,260,260,150,280,0,300,300,0,320,200,350,0,400,450][i]}));
-export const tokens=['🚕','🚌','🛺','🦙','🪆','🚐','🚍','🚈','🥤','🐂','🛵','🍢'];
-// Fichas antiguas siguen siendo válidas en salas ya existentes.
-const previousTokens=['🚕','🛵','🚌','🚲','🚗','🚁','🚀','🐆','🦙','🛺','⚽','🛹'];
+export const tokens=['🚕','🛵','🚌','🚲','🚗','🚁','🚀','🐆','🦙','🛺','⚽','🛹'];
 export const money=n=>'S/ '+Math.round(n).toLocaleString('es-PE');
-export function newGame(players){return {players:players.map((p,i)=>({id:p.id,name:p.name,token:[...tokens,...previousTokens].includes(p.token)?p.token:tokens[i%tokens.length],pos:0,cash:1500,jail:0,jailAttempts:0,jailPass:0,bankrupt:false})),turn:0,phase:'roll',properties:{},dice:[1,1],doubleCount:0,log:['¡Bienvenidos a Lima City!'],winner:null,pot:0,revision:0};}
-// Una sola acción puede desplazar una ficha varios tramos: dados + carta + comisaría.
-const trackStep=(g,p,from,steps,direction='forward')=>{
- if(!Number.isInteger(from)||!Number.isInteger(p.pos)||from===p.pos)return;
- (g._motionSteps??=[]).push({from,to:p.pos,steps,direction});
-};
+export function newGame(players){return {players:players.map((p,i)=>({id:p.id,name:p.name,token:tokens.includes(p.token)?p.token:tokens[i],pos:0,cash:1500,jail:0,jailAttempts:0,bankrupt:false})),turn:0,phase:'roll',properties:{},dice:[1,1],doubleCount:0,log:['¡Bienvenidos a Lima City!'],winner:null,pot:0,revision:0};}
 const payBank=(g,player,amount,toPot=false)=>{transfer(g,player.id,null,amount);if(toPot)g.pot=(g.pot||0)+amount};
 const log=(g,t)=>{g.log=[t,...g.log].slice(0,18)};
 const next=(g)=>{let n=g.turn;do{n=(n+1)%g.players.length}while(g.players[n].bankrupt&&n!==g.turn);g.turn=n;g.phase='roll';g.doubleCount=0};
 const owns=(g,id)=>g.properties[id];
 const groups=[[1,3],[6,8,9],[11,13,14],[16,18,19],[21,23,24],[26,27,29],[31,32,34],[36,38,39]];
 export const groupFor=id=>groups.find(a=>a.includes(Number(id)))||[];
-// Identidad cromática real de los ocho grupos: diferente de los colores de los jugadores.
-export const groupMeta=[
- {name:'Café',color:'#A67A52',area:'Lima Norte'},
- {name:'Celeste',color:'#42A5D5',area:'Conexión Norte'},
- {name:'Magenta',color:'#C75C9A',area:'Lima tradicional'},
- {name:'Naranja',color:'#ED8A4E',area:'Barrios históricos'},
- {name:'Amarillo',color:'#D9B441',area:'Lima residencial'},
- {name:'Verde',color:'#4FBA90',area:'Lima moderna'},
- {name:'Coral',color:'#F27370',area:'Costa limeña'},
- {name:'Azul',color:'#5476D9',area:'Lima premium'}
-];
-export const groupDetails=id=>{const index=groups.findIndex(g=>g.includes(Number(id)));return index<0?null:{...groupMeta[index],ids:[...groups[index]],index};};
-groups.forEach((g,i)=>g.forEach(id=>{board[id].color=groupMeta[i].color}));
 export const buildCost=id=>Math.round(board[id].price*.5);
 export function rentTable(id){let b=board[id];if(b.kind!=='property')return [];let base=Math.max(2,Math.round(b.price*.1));return [base,Math.round(base*5),Math.round(base*15),Math.round(base*45),Math.round(base*80),Math.round(base*125)];}
 export function rentAt(g,id){let b=board[id],pr=g.properties?.[id];if(!pr||pr.mortgaged)return 0;if(b.kind==='transport')return 25*Math.pow(2,Object.keys(g.properties).filter(k=>board[k].kind==='transport'&&g.properties[k].owner===pr.owner).length-1);if(b.kind==='utility')return 35;let table=rentTable(id);if(pr.houses>0)return table[Math.min(5,pr.houses)];let monopoly=groupFor(id).every(i=>g.properties?.[i]?.owner===pr.owner);return table[0]*(monopoly?2:1)};
@@ -37,7 +17,7 @@ const notify=(g,type,p,details={})=>{g.lastEvent={type,playerId:p.id,playerName:
 
 const rent=(g,id)=>rentAt(g,id);
 function transfer(g,from,to,amount){let p=g.players.find(p=>p.id===from);if(!p)return;p.cash-=amount;if(to){let q=g.players.find(p=>p.id===to);if(q)q.cash+=amount;}if(p.cash<0){p.bankrupt=true;for(let k of Object.keys(g.properties)){if(g.properties[k].owner===p.id)delete g.properties[k]}log(g,`${p.name} quedó en bancarrota`);let active=g.players.filter(x=>!x.bankrupt);if(active.length===1){g.winner=active[0].id;g.phase='finished';log(g,`🏆 ${active[0].name} ganó Lima City`)}}}
-export const decks={
+const decks={
  community:[
  {title:'Fondo de ahorro',description:'Recuperas dinero de tu fondo comunal.',amount:200,emoji:'🏦'},
  {title:'Consulta médica',description:'Pagas gastos de atención médica.',amount:-50,emoji:'🩺'},
@@ -54,23 +34,7 @@ export const decks={
  {title:'Voluntariado reconocido',description:'Recibes un incentivo por tu ayuda.',amount:60,emoji:'🙌'},
  {title:'Aporte escolar',description:'Colaboras con materiales para una escuela.',amount:-50,emoji:'📚'},
  {title:'Visita a la comisaría',description:'Ve a la comisaría sin cobrar por SALIDA.',type:'jail',emoji:'🚓'},
- {title:'Vuelve a SALIDA',description:'Avanza a SALIDA y cobra S/ 200.',type:'move',target:0,emoji:'🚩'},
- {title:'Pollada del barrio',description:'Apoyas una pollada comunitaria. Entrega S/ 15 a cada rival.',type:'payEach',amount:15,emoji:'🍗'},
- {title:'Emoliente mañanero',description:'Tu puesto de emoliente tuvo un día excelente.',amount:45,emoji:'☕'},
- {title:'Jornada de limpieza',description:'La municipalidad reconoce tu esfuerzo.',amount:80,emoji:'🧹'},
- {title:'Arbitrios del mes',description:'Llega el recibo de limpieza y serenazgo.',amount:-90,emoji:'📫'},
- {title:'Fiesta del vecindario',description:'Todos cooperan para tu fiesta. Cobra S/ 10 por jugador.',type:'collectEach',amount:10,emoji:'🎊'},
- {title:'Serenazgo solidario',description:'Aportas para mejorar la vigilancia del barrio.',amount:-35,emoji:'🚨'},
- {title:'Sorteo del mercado',description:'Tu ticket del mercado municipal es premiado.',amount:130,emoji:'🧺'},
- {title:'Pintura de fachadas',description:'Pagas S/ 40 por casa y S/ 115 por hotel.',type:'repairs',perHouse:40,perHotel:115,emoji:'🎨'},
- {title:'Vales de comedor',description:'Ganas vales que puedes canjear por efectivo.',amount:65,emoji:'🍲'},
- {title:'Visita Pueblo Libre',description:'Avanza hasta Pueblo Libre.',type:'move',target:19,emoji:'🏛️'},
- {title:'Pase libre de comisaría',description:'Guarda esta tarjeta para salir gratis de la comisaría.',type:'jailPass',emoji:'🔓'},
- {title:'Feria del libro',description:'Recibes ganancias por tu puesto cultural.',amount:100,emoji:'📖'},
- {title:'Cuota de seguridad',description:'La junta vecinal aprueba una cuota adicional.',amount:-60,emoji:'🛡️'},
- {title:'Emprendimiento vecinal',description:'Tu proyecto local recibe apoyo económico.',amount:95,emoji:'🛍️'},
- {title:'Calle cerrada',description:'Por obras en el barrio retrocedes dos casillas.',type:'back',steps:2,emoji:'🚧'},
- {title:'Pasaje de barrio',description:'Toma el transporte más cercano hacia adelante.',type:'nearestTransport',emoji:'🚌'}
+ {title:'Vuelve a SALIDA',description:'Avanza a SALIDA y cobra S/ 200.',type:'move',target:0,emoji:'🚩'}
  ],
  chance:[
  {title:'¡Rumbo a Miraflores!',description:'Avanza hasta Miraflores.',type:'move',target:38,emoji:'🌊'},
@@ -88,56 +52,23 @@ export const decks={
  {title:'Premio de la feria',description:'Ganaste un sorteo limeño.',amount:200,emoji:'🎟️'},
  {title:'Gastos de transporte',description:'Pagas pasajes y movilidad.',amount:-50,emoji:'🚌'},
  {title:'Bono de temporada',description:'Recibes un bono especial.',amount:75,emoji:'🎁'},
- {title:'Cobro por servicios',description:'Cada jugador te paga S/ 25.',type:'collectEach',amount:25,emoji:'💰'},
- {title:'Metropolitano expreso',description:'Avanza al siguiente transporte disponible.',type:'nearestTransport',emoji:'🚍'},
- {title:'Tour por Línea 1',description:'Sube al tren y avanza a Línea 1.',type:'move',target:15,emoji:'🚈'},
- {title:'Recibo de luz',description:'Ve al siguiente servicio público.',type:'nearestUtility',emoji:'⚡'},
- {title:'Paseo por San Borja',description:'Avanza hasta San Borja.',type:'move',target:27,emoji:'🌳'},
- {title:'Tráfico en la avenida',description:'Un desvío te hace retroceder cuatro casillas.',type:'back',steps:4,emoji:'🚗'},
- {title:'Temporada de negocios',description:'Cada rival te paga S/ 15 por tus servicios.',type:'collectEach',amount:15,emoji:'📈'},
- {title:'Compras en Gamarra',description:'Te emocionaste con las ofertas. Paga S/ 90.',amount:-90,emoji:'🛍️'},
- {title:'Festival de luces',description:'Tu emprendimiento vendió todo.',amount:120,emoji:'🎆'},
- {title:'Mantenimiento general',description:'Paga S/ 50 por casa y S/ 130 por hotel.',type:'repairs',perHouse:50,perHotel:130,emoji:'🏗️'},
- {title:'Salvoconducto limeño',description:'Guarda un pase para salir gratis de la comisaría.',type:'jailPass',emoji:'🎫'},
- {title:'Destino Puente Piedra',description:'Avanza hasta Puente Piedra.',type:'move',target:6,emoji:'🌉'},
- {title:'Playa de estacionamiento',description:'Pagas por dejar el carro en el centro.',amount:-65,emoji:'🅿️'},
- {title:'Atardecer en el malecón',description:'Ganas un premio de fotografía urbana.',amount:80,emoji:'🌅'},
- {title:'Combi al toque',description:'Avanza hasta el siguiente transporte.',type:'nearestTransport',emoji:'🚐'},
- {title:'Desayuno para todos',description:'Invitas desayuno a todos: S/ 10 por jugador.',type:'payEach',amount:10,emoji:'🥖'},
- {title:'Paseo por Lince',description:'Avanza hasta Lince.',type:'move',target:23,emoji:'🌆'}
+ {title:'Cobro por servicios',description:'Cada jugador te paga S/ 25.',type:'collectEach',amount:25,emoji:'💰'}
  ]
 };
 const shuffle=a=>{let v=[...a];for(let i=v.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[v[i],v[j]]=[v[j],v[i]]}return v};
 function draw(g,deck){g.cardDecks??={};if(!g.cardDecks[deck]?.length)g.cardDecks[deck]=shuffle(decks[deck].map((_,i)=>i));return decks[deck][g.cardDecks[deck].shift()]}
 function applyCard(g,p,card){
- if(card.type==='jail'){let from=p.pos;p.pos=10;trackStep(g,p,from,0,'teleport');p.jail=1;p.jailAttempts=0;log(g,`${p.name} fue a la comisaría`)}
- else if(card.type==='jailPass'){
-  p.jailPass=(p.jailPass||0)+1;
-  log(g,`🔓 ${p.name} recibió un pase para salir gratis de la comisaría`);
- }else if(card.type==='repairs'){
-  let houses=0,hotels=0;
-  for(const [id,prop] of Object.entries(g.properties||{})){
-   if(prop.owner!==p.id)continue;
-   if(prop.houses===5)hotels++;else houses+=Math.max(0,prop.houses||0);
-  }
-  const cost=houses*card.perHouse+hotels*card.perHotel;
-  if(cost>0)payBank(g,p,cost,true);
-  log(g,`${p.name} pagó ${money(cost)} por ${houses} casas y ${hotels} hoteles`);
- }else if(['move','back','nearestTransport','nearestUtility'].includes(card.type)){
-  const old=p.pos;
-  const route=card.type==='nearestTransport'?[5,15,25,35]:[12,28];
-  const target=card.type==='back'?(p.pos-card.steps+40)%40
-   :card.type==='nearestTransport'||card.type==='nearestUtility'
-    ?(route.find(id=>id>old)??route[0]):card.target;
-  p.pos=target;trackStep(g,p,old,card.type==='back'?card.steps:(target-old+40)%40,card.type==='back'?'back':'forward');
-  if(card.type!=='back'&&target<=old){p.cash+=200;log(g,`${p.name} cobró ${money(200)} por pasar por SALIDA`)}
-  log(g,`${p.name} avanzó a ${board[p.pos].name}`);resolve(g,p,false);
+ if(card.type==='jail'){p.pos=10;p.jail=1;p.jailAttempts=0;log(g,`${p.name} fue a la comisaría`)}
+ else if(card.type==='move'||card.type==='back'){
+  const old=p.pos;const target=card.type==='back'?(p.pos-card.steps+40)%40:card.target;
+  p.pos=target;if(card.type==='move'&&target<=old){p.cash+=200;log(g,`${p.name} cobró ${money(200)} por pasar por SALIDA`)}
+  log(g,`${p.name} avanzó a ${board[p.pos].name}`);resolve(g,p,false)
  }else if(card.type==='collectEach'||card.type==='payEach'){
   for(const other of g.players){if(other.id===p.id||other.bankrupt)continue;if(card.type==='collectEach')transfer(g,other.id,p.id,card.amount);else transfer(g,p.id,other.id,card.amount)}
   log(g,`${p.name}: ${card.title}`)
  }else{const amt=card.amount;if(amt>=0)p.cash+=amt;else payBank(g,p,-amt,true);log(g,`${card.title}: ${amt>=0?'+':''}${money(amt)}`)}
 }
-function resolve(g,p,allowCard=true){let b=board[p.pos],pr=owns(g,p.pos);if(b.kind==='property'||b.kind==='transport'||b.kind==='utility'){if(pr){if(pr.owner!==p.id&&!pr.mortgaged){let r=rent(g,p.pos);transfer(g,p.id,pr.owner,r);log(g,`${p.name} pagó ${money(r)} por ${b.name}`);notify(g,'rent',p,{propertyId:p.pos,amount:r,ownerName:g.players.find(z=>z.id===pr.owner)?.name||'otro jugador'})}}else{g.phase='decision';notify(g,'property',p,{propertyId:p.pos,amount:b.price});log(g,`${p.name} puede comprar ${b.name} por ${money(b.price)}`)}}else if(b.kind==='tax'){let v=p.pos===4?100:150;payBank(g,p,v,true);notify(g,'tax',p,{amount:v,propertyId:p.pos});log(g,`${p.name} pagó ${money(v)} de impuestos`)}else if((b.kind==='chance'||b.kind==='community')&&allowCard){let deck=b.kind==='chance'?'chance':'community';let card=draw(g,deck);const charged=card.type==='repairs'?Object.values(g.properties||{}).filter(prop=>prop.owner===p.id).reduce((sum,prop)=>sum+(prop.houses===5?card.perHotel:Math.max(0,prop.houses||0)*card.perHouse),0):null;applyCard(g,p,card);g.lastCard={...card,...(charged===null?{}:{charged}),deck,playerId:p.id,playerName:p.name,revision:(g.cardSerial=(g.cardSerial||0)+1)};}else if(p.pos===30){let from=p.pos;p.pos=10;trackStep(g,p,from,0,'teleport');p.jail=1;p.jailAttempts=0;notify(g,'jail',p);log(g,`${p.name} fue enviado a la comisaría`)}else if(p.pos===20){let jackpot=g.pot||0;g.pot=0;p.cash+=jackpot;notify(g,'pot',p,{amount:jackpot});log(g,`${p.name} cobró ${money(jackpot)} del Pozo Regalón Tinka`)}}
+function resolve(g,p,allowCard=true){let b=board[p.pos],pr=owns(g,p.pos);if(b.kind==='property'||b.kind==='transport'||b.kind==='utility'){if(pr){if(pr.owner!==p.id&&!pr.mortgaged){let r=rent(g,p.pos);transfer(g,p.id,pr.owner,r);log(g,`${p.name} pagó ${money(r)} por ${b.name}`);notify(g,'rent',p,{propertyId:p.pos,amount:r,ownerName:g.players.find(z=>z.id===pr.owner)?.name||'otro jugador'})}}else{g.phase='decision';notify(g,'property',p,{propertyId:p.pos,amount:b.price});log(g,`${p.name} puede comprar ${b.name} por ${money(b.price)}`)}}else if(b.kind==='tax'){let v=p.pos===4?100:150;payBank(g,p,v,true);notify(g,'tax',p,{amount:v,propertyId:p.pos});log(g,`${p.name} pagó ${money(v)} de impuestos`)}else if((b.kind==='chance'||b.kind==='community')&&allowCard){let deck=b.kind==='chance'?'chance':'community';let card=draw(g,deck);applyCard(g,p,card);g.lastCard={...card,deck,playerId:p.id,playerName:p.name,revision:(g.cardSerial=(g.cardSerial||0)+1)};}else if(p.pos===30){p.pos=10;p.jail=1;p.jailAttempts=0;notify(g,'jail',p);log(g,`${p.name} fue enviado a la comisaría`)}else if(p.pos===20){let jackpot=g.pot||0;g.pot=0;p.cash+=jackpot;notify(g,'pot',p,{amount:jackpot});log(g,`${p.name} cobró ${money(jackpot)} del pozo de DESCANSO`)}}
 export function apply(input,action){let g=structuredClone(input);g.properties ??= {};g.dice ??= [1,1];g.log ??= [];if(g.auction)g.auction.passed ??= {};if(g.winner)return g;let p=g.players[g.turn];const actor=g.players.find(x=>x.id===action.playerId);if(!actor||actor.bankrupt)return input;
 if(action.type==='reaction'){const allowed=['👏','😂','😎','🔥','💸','😱'];if(!allowed.includes(action.emoji))return input;g.reaction={emoji:action.emoji,playerName:actor.name,serial:(g.reactionSerial||0)+1};g.reactionSerial=g.reaction.serial;g.revision++;return g}
 // Subasta por rondas libres: se puede contraofertar mientras no se haya pasado.
@@ -175,11 +106,10 @@ if(action.type==='auctionClose'&&g.phase==='auction'&&g.auction&&action.playerId
 if(action.type==='tradeOffer'&&g.phase!=='auction'&&!g.trade){let t=action.trade;if(!t||action.playerId!==p.id||t.to===actor.id)return input;let target=g.players.find(x=>x.id===t.to&&!x.bankrupt);let give=Number(t.give),take=Number(t.take),pay=Math.floor(Number(t.pay||0)),receive=Math.floor(Number(t.receive||0));if(!target||!Number.isInteger(give)||!Number.isInteger(take)||!Number.isFinite(pay)||!Number.isFinite(receive)||pay<0||receive<0||pay>actor.cash||receive>target.cash||!(g.properties[give]?.owner===actor.id||give===-1)||!(g.properties[take]?.owner===target.id||take===-1)||give===-1&&take===-1&&pay===0&&receive===0)return input;const clear=id=>id===-1||g.properties[id]?.houses===0&&groupFor(id).every(i=>!g.properties[i]?.houses);if(!clear(give)||!clear(take))return input;g.trade={from:actor.id,to:target.id,give,take,pay,receive};log(g,`🤝 ${actor.name} envió una propuesta a ${target.name}`);g.revision++;return g}
 if((action.type==='tradeAccept'||action.type==='tradeReject')&&g.trade){let t=g.trade;if(action.playerId!==t.to&&!(action.type==='tradeReject'&&action.playerId===t.from))return input;if(action.type==='tradeAccept'){let sender=g.players.find(x=>x.id===t.from),target=g.players.find(x=>x.id===t.to);const valid=sender&&!sender.bankrupt&&target&&!target.bankrupt&&sender.cash>=t.pay&&target.cash>=t.receive&&(t.give===-1||g.properties[t.give]?.owner===sender.id)&&(t.take===-1||g.properties[t.take]?.owner===target.id)&&[t.give,t.take].every(id=>id===-1||g.properties[id]?.houses===0&&groupFor(id).every(i=>!g.properties[i]?.houses));if(!valid){g.trade=null;log(g,'La propuesta ya no es válida');g.revision++;return g}sender.cash+=t.receive-t.pay;target.cash+=t.pay-t.receive;if(t.give!==-1)g.properties[t.give].owner=target.id;if(t.take!==-1)g.properties[t.take].owner=sender.id;log(g,`🤝 ${sender.name} y ${target.name} intercambiaron propiedades y dinero`)}else log(g,'Propuesta de intercambio rechazada');g.trade=null;g.revision++;return g}
 if(action.playerId!==p.id)return input;
-if(action.type==='useJailPass'&&g.phase==='roll'&&p.jail&&(p.jailPass||0)>0){p.jailPass--;p.jail=0;p.jailAttempts=0;log(g,`🔓 ${p.name} utilizó su pase para salir de comisaría`)}
-else if(action.type==='roll'&&g.phase==='roll'){g._motionSteps=[];let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6);g.dice=[a,b];if(p.jail){
- if(a===b){p.jail=0;p.jailAttempts=0;log(g,`${p.name} sacó dobles y salió de la comisaría`);let old=p.pos;p.pos=(p.pos+a+b)%40;trackStep(g,p,old,a+b);if(p.pos<old)p.cash+=200;g.phase='end';resolve(g,p)}
- else{p.jailAttempts=(p.jailAttempts||0)+1;if(p.jailAttempts>=3){payBank(g,p,50,true);p.jail=0;p.jailAttempts=0;notify(g,'jailFee',p,{amount:50});log(g,`${p.name} agotó sus 3 intentos y pagó ${money(50)} para salir`);let old=p.pos;p.pos=(p.pos+a+b)%40;trackStep(g,p,old,a+b);if(p.pos<old)p.cash+=200;g.phase='end';if(!p.bankrupt)resolve(g,p)}else{g.phase='end';notify(g,'jailTry',p,{attempt:p.jailAttempts});log(g,`${p.name} no sacó dobles. Intento ${p.jailAttempts}/3`)}}
- }else{let old=p.pos;p.pos=(p.pos+a+b)%40;trackStep(g,p,old,a+b);if(p.pos<old){p.cash+=200;log(g,`${p.name} cobró ${money(200)} por pasar por SALIDA`)}log(g,`${p.name} sacó ${a} y ${b} y llegó a ${board[p.pos].name}`);g.phase='end';resolve(g,p)}}
+if(action.type==='roll'&&g.phase==='roll'){let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6);g.dice=[a,b];if(p.jail){
+ if(a===b){p.jail=0;p.jailAttempts=0;log(g,`${p.name} sacó dobles y salió de la comisaría`);let old=p.pos;p.pos=(p.pos+a+b)%40;if(p.pos<old)p.cash+=200;g.phase='end';resolve(g,p)}
+ else{p.jailAttempts=(p.jailAttempts||0)+1;if(p.jailAttempts>=3){payBank(g,p,50,true);p.jail=0;p.jailAttempts=0;notify(g,'jailFee',p,{amount:50});log(g,`${p.name} agotó sus 3 intentos y pagó ${money(50)} para salir`);let old=p.pos;p.pos=(p.pos+a+b)%40;if(p.pos<old)p.cash+=200;g.phase='end';if(!p.bankrupt)resolve(g,p)}else{g.phase='end';notify(g,'jailTry',p,{attempt:p.jailAttempts});log(g,`${p.name} no sacó dobles. Intento ${p.jailAttempts}/3`)}}
+ }else{let old=p.pos;p.pos=(p.pos+a+b)%40;if(p.pos<old){p.cash+=200;log(g,`${p.name} cobró ${money(200)} por pasar por SALIDA`)}log(g,`${p.name} sacó ${a} y ${b} y llegó a ${board[p.pos].name}`);g.phase='end';resolve(g,p)}}
 else if(action.type==='payJail'&&g.phase==='roll'&&p.jail&&p.cash>=50){payBank(g,p,50,true);p.jail=0;p.jailAttempts=0;notify(g,'jailFee',p,{amount:50});log(g,`${p.name} pagó ${money(50)} para salir de la comisaría`)}
 else if(action.type==='ackEvent'&&g.lastEvent&&g.lastEvent.playerId===p.id){g.lastEvent=null}
 else if(action.type==='ackCard'&&g.lastCard&&g.lastCard.playerId===p.id){g.lastCard=null}
@@ -188,13 +118,4 @@ else if(action.type==='skip'&&g.phase==='decision'){g.lastEvent=null;g.phase='au
 else if(action.type==='end'&&g.phase==='end'){next(g)}
 else if(action.type==='build'&&g.phase!=='finished'){let id=Number(action.id),b=board[id],pr=g.properties[id],cost=Math.round(b.price*.5);if(pr?.owner===p.id&&b.kind==='property'&&pr.houses<5&&p.cash>=cost&&!pr.mortgaged&&groupFor(id).every(i=>g.properties[i]?.owner===p.id&&!g.properties[i]?.mortgaged)&&groupFor(id).every(i=>(g.properties[i]?.houses||0)>=pr.houses)){p.cash-=cost;pr.houses++;log(g,`${p.name} construyó en ${b.name} (${pr.houses===5?'hotel':pr.houses+' casas'})`)}}
 else if(action.type==='mortgage'&&g.phase!=='finished'){let id=Number(action.id),pr=g.properties[id],b=board[id];if(pr?.owner===p.id&&pr.houses===0&&groupFor(id).every(i=>!g.properties[i]?.houses)){if(pr.mortgaged&&p.cash>=Math.ceil(b.price*.55)){p.cash-=Math.ceil(b.price*.55);pr.mortgaged=false;log(g,`${p.name} levantó la hipoteca de ${b.name}`)}else if(!pr.mortgaged){p.cash+=Math.floor(b.price*.5);pr.mortgaged=true;log(g,`${p.name} hipotecó ${b.name}`)}}}
-else return input;
-if(action.type==='roll'){
-  // lastMotion only describes animation; final positions and rules remain authoritative.
-  if(g._motionSteps?.length){
-    g.motionSerial=(g.motionSerial||0)+1;
-    g.lastMotion={serial:g.motionSerial,playerId:p.id,segments:g._motionSteps};
-  }
-  delete g._motionSteps;
-}
-g.revision++;return g}
+else return input;g.revision++;return g}

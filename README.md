@@ -1,22 +1,46 @@
-# LIMA CITY v17.2 — Chicha Urbana 🇵🇪
+# 🌆 LIMA CITY — Edición Perú
 
-Versión basada en la v17.1 estable. No modifica la estructura de Firebase ni sus reglas.
+Juego web de compra de propiedades ambientado en distritos de Lima. Incluye tablero de 40 casillas, partidas privadas de 2 a 6 jugadores, dados, alquileres, casas/hoteles, hipotecas, impuestos, eventos y bancarrota.
 
-## Novedades
+## Publicación rápida en GitHub + Vercel
 
-- Letras originales inspiradas en afiches chicha peruanos (no se copia el logotipo de referencia).
-- Ilustraciones del centro con Cerro San Cristóbal, costa, palmeras y una fachada inspirada en la Plaza Mayor.
-- 24 propiedades con símbolos y referencias de sus distritos; panel de título de propiedad más gráfico.
-- Casilla 20: **LA TINKA**, mismo funcionamiento del pozo; panel **POZO REGALÓN TINKA**.
-- Nuevas fichas peruanas: Taxi, Corredor azul, Mototaxi, Llama, Ekeko, Combi, Metropolitano, Tren eléctrico, Emolientero, Torito, Chullo y Delivery.
-- Fichas más grandes, tipo medallón, con sombra y salto **casilla por casilla** tras tirar los dados.
-- Se guardan los tramos visuales de movimiento en Firebase para que ambos dispositivos vean la animación.
-- 64 cartas, subastas, intercambios, casas, hoteles, pozo, hipotecas y lógica base conservados.
+1. Descomprime el ZIP y sube **el contenido de la carpeta** a un repositorio nuevo de GitHub (Add file → Upload files → Commit changes).
+2. En https://console.firebase.google.com crea un proyecto. En **Build → Realtime Database**, crea una base de datos y copia su URL. **Importante:** selecciona Realtime Database, no Firestore.
+3. En **Realtime Database → Rules** pega el contenido de `database.rules.json` y publica las reglas. **Estas reglas son solo para pruebas privadas**: permiten leer y modificar salas sin autenticar. No son adecuadas para un lanzamiento público.
+4. En Firebase → Configuración del proyecto → Tus apps → Web (`</>`) registra una app y copia los valores de `firebaseConfig`.
+5. En https://vercel.com crea **Add New → Project**, importa el repositorio y elige Vite (o deja que lo detecte). En **Environment Variables** añade:
+   - `VITE_FIREBASE_API_KEY` = `apiKey`
+   - `VITE_FIREBASE_AUTH_DOMAIN` = `authDomain`
+   - `VITE_FIREBASE_DATABASE_URL` = URL de Realtime Database
+   - `VITE_FIREBASE_PROJECT_ID` = `projectId`
+   - `VITE_FIREBASE_APP_ID` = `appId`
+6. Haz clic en **Deploy**. Si añadiste variables después de publicar, haz **Redeploy**. Abre el enlace de Vercel en cada celular, crea sala y comparte el código de 6 caracteres.
 
-## Instalación
+## Prueba en tu computadora
 
-Sube TODOS los archivos y la carpeta `public` al repositorio, respetando las rutas. Espera a que Vercel muestre Ready. Crea una sala nueva y prueba con dos dispositivos.
+`npm install` → copia `.env.example` como `.env` y rellena los valores → `npm run dev`.
 
-**Pruebas**: el archivo `test-engine.mjs` puede ejecutarse con `node test-engine.mjs`. El resultado visual y la sincronización en producción requieren pruebas reales con navegadores.
+## Reglas y limitaciones de esta primera versión
 
-**Marca**: «La Tinka» es el nombre de una marca comercial real. Para distribución pública o monetización, considera sustituirlo por una denominación original como «La Tómbola Limeña» y «Pozo Regalón».
+- Cada jugador empieza con S/ 1,500. Pasar por salida otorga S/ 200.
+- Turnos secuenciales, dados de 2 a 12; sin tiradas extra por dobles.
+- Compra de propiedades, transporte y servicios; alquiler automático.
+- Casas (hasta 4) y hotel (5.º nivel) con costo del 50 % del precio del distrito. Sin requisito de monopolio de color.
+- Hipoteca de propiedades sin construcciones al 50 % y rescate al 55 % del precio.
+- Cartas de eventos aleatorios simplificados; comisaría con un turno perdido.
+- La partida termina cuando solo queda un jugador solvente.
+- No hay comercio entre jugadores, subastas, temporizador ni reconexión garantizada. La partida no se guarda para continuar otro día; las salas de Firebase pueden permanecer almacenadas hasta que se borren manualmente.
+- El proyecto **no incluye autenticación ni seguridad contra trampas**. Las reglas abiertas se entregan exclusivamente para pruebas con amigos de confianza. No compartas públicamente una base de datos con estas reglas; para producción se requiere autenticación, validación de movimientos y restricciones de acceso.
+
+LIMA CITY es un proyecto independiente, con nombres, diseño y tablero propios; no es un producto oficial de Monopoly.
+
+
+## Corrección v3
+Se consulta la sala con `get()` antes de iniciar la transacción de ingreso. Esto evita que la transacción se cancele inmediatamente cuando la caché local todavía no tiene la sala.
+
+## v4: ingreso a salas
+La transacción usa el resultado de get() como base cuando Firebase inicia con caché vacía; distingue fallos de lectura, estado y escritura. Reglas actuales solo para partidas privadas de prueba, no resistentes a trampas.
+
+
+## Versión 13 — DELUXE
+Interfaz rediseñada y títulos de propiedad coleccionables con tabla de alquileres y costo de construcción. No requiere cambios de Firebase.
